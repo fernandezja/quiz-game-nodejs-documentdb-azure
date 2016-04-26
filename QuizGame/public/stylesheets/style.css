@@ -1,0 +1,23 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #00b7ff;
+}
+.home {
+  padding: 50px;
+  background-color: #005e9b;
+  color: #fff;
+}
+.home .img-responsive {
+  margin: 0 auto;
+}
+.quizgame-nav {
+  background-color: #005e9b;
+  border-color: #005e9b;
+  color: #fff;
+}
+.navbar-brand {
+  padding: 3px 3px !important;
+}
