@@ -1,6 +1,37 @@
 ﻿extends layout
 
 block content
-  h1 Crear partida
 
+  script.
+          var x = document.getElementById("demo");
+          function getLocation() {
+
+          if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+          } 
+          else {
+          x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+          }
+
+          function showPosition(position) {
+          x.innerHTML = "Latitude: " + position.coords.latitude +
+          "<br>Longitude: " + position.coords.longitude;
+          }
+
+          function show() {
+          mostrar = showPosition(position);
+          document.formCrear.ubicacion.value=mostrar;
+          }
+
+          div(class="col-md-12 text-center")
+          h1 Crear partida
+
+  form(name='formCrear', action='/partida/crear', method='get')
+        .form-group
+        input#nombre.form-control(type='text', name='nombre', placeholder='Nombre')
+        br
+        input#ubicacion.form-control(type='text', name='ubicacion', placeholder='Ubicacion', value='show()')
+        br
+        button.btn.btn-primary.btn-lg(type='button', onclick='getLocation()') Crear
   
