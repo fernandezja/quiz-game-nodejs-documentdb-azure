@@ -1,0 +1,9 @@
+﻿extends layout
+
+block content
+    h1 Partida: #{partida.descripcion}
+
+  
+    each j in jugadores
+        div(class="jugador")
+            span(class="") #{j.nombre}
