@@ -21,7 +21,7 @@ block content
                 i(class="fa fa-circle-o-notch fa-spin fa-3x fa-fw margin-bottom")
                 br
                 span(class="") Proxima pregunta en 
-                span(id="segundosParaProximaPregunta") X 
+                span(id="segundosParaProximaPregunta") 5 
                 span(class="") &nbsp; segundos...
                  
             script.
@@ -29,7 +29,7 @@ block content
                 setInterval(function(){
                     contador--;
                     document.getElementById('segundosParaProximaPregunta').innerHTML = contador;
-                    if (contador == 0) {
+                    if (contador == 1) {
                         window.location = '/partida/#{partida.id}/pregunta/#{pregunta.id}'; 
                     }
                 },1000);
