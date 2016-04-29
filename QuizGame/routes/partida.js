@@ -58,6 +58,7 @@ router.get('/:partidaId/ranking', function (req, res) {
             id: 1,
             descripcion:'Partida A'
         },
+
         jugadores: [
             {
                 id: 1,
@@ -66,7 +67,7 @@ router.get('/:partidaId/ranking', function (req, res) {
                 nickname: 'groso',
                 puntos: 10,
                 cantidadPreguntasCorrectas: 5,
-                cantidadPreguntasErroneas: 5
+                cantidadPreguntasErroneas: 5,
             },
             {
                 id: 2,
@@ -75,7 +76,7 @@ router.get('/:partidaId/ranking', function (req, res) {
                 nickname: 'muyGroso',
                 puntos: 12,
                 cantidadPreguntasCorrectas: 7,
-                cantidadPreguntasErroneas: 5
+                cantidadPreguntasErroneas: 5,
             }
         ]
     }

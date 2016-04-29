@@ -1,14 +1,14 @@
 ﻿extends layout
 
 block content
-  h1 Partidas
+      h1 Partidas
 
   
       each p in partidas
           form(action='/partida/id', method='get')
             div
               button.btn.btn-primary(type="submit") #{p.descripcion}
-              br
+            br
       br
       br      
       form(action="/partida/crear", method="get")

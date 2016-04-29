@@ -3,7 +3,27 @@
 block content
     h1 Partida: #{partida.descripcion}
 
-  
-    each j in jugadores
-        div(class="jugador")
-            span(class="") #{j.nombre}
+    div(class="row")
+        each j in jugadores
+            div(class="jugador")            
+                div(class="col-md-12")
+                    div(class="row")
+                        div(class="col-md-4 col-xs-4")
+                            img(class="img-thumbnail", src="https://scontent-gru2-1.xx.fbcdn.net/hphotos-xtl1/v/t1.0-9/10425355_10203649454730210_3179339780669292461_n.jpg?oh=9a3e9d55a058d12d2b25bd50d2482abc&oe=5799909E", width="100px" )
+
+                         div(class="col-md-8 col-xs-8")
+                            div(class="row")
+                                div(class="col-md-12")
+                                    span(class="")
+                                        strong #{j.nombre}
+                                div(class="col-md-12")
+                                    div(class="col-md-6 col-xs-6 totales")
+                                        h3 <em>#{j.puntos}</em>
+                                    div(class="col-md-6 col-xs-6 ")
+                                            div(class="col-md-12 correctas")
+                                                i(class="fa fa-check") 
+                                                span &nbsp;#{j.cantidadPreguntasCorrectas}
+                                            div(class="col-md-12 erroneas")
+                                                i(class="fa fa-times") 
+                                                span &nbsp;#{j.cantidadPreguntasErroneas}
+                                                
