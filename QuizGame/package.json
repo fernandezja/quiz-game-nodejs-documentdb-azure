@@ -1,7 +1,7 @@
 {
   "name": "QuizGame",
   "version": "0.0.0",
-  "private": true,
+  "private": true, 
   "scripts": {
     "start": "node ./bin/www"
   },
