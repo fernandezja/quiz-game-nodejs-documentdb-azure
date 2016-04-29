@@ -22,6 +22,44 @@ router.get('/crear', function (req, res) {
     res.render('partidaCrear', partidaVm);
 });
 
+router.get('/:partidaId/ranking', function (req, res) {
+    
+    var partidaId = req.params.partidaId;    
+    console.log('partidaId:', partidaId);
+    
+    var ranking = {
+        partida: {
+            id: 1,
+            descripcion:'Partida A'
+        },
+
+        jugadores: [
+            {
+                id: 1,
+                apellido: 'Apellido 1',
+                nombre: 'Nombre 1',
+                nickname: 'groso',
+                puntos: 10,
+                cantidadPreguntasCorrectas: 5,
+                cantidadPreguntasErroneas: 5,
+            },
+            {
+                id: 2,
+                apellido: 'Apellido 2',
+                nombre: 'Nombre 2',
+                nickname: 'muyGroso',
+                puntos: 12,
+                cantidadPreguntasCorrectas: 7,
+                cantidadPreguntasErroneas: 5,
+            }
+        ]
+    }
+    
+    
+    
+    
+    res.render('partidaRanking', ranking);
+});
 
 router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
     
