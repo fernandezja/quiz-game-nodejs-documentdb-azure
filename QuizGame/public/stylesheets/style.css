@@ -21,11 +21,8 @@ a {
 .navbar-brand {
   padding: 3px 3px !important;
 }
-
-
-/*pregunta */
 .pregunta-partida {
-    background-color:fuchsia;
-    padding:5px;
-    background-color:#a0ed72;
+  background-color: #f0f;
+  padding: 5px;
+  background-color: #a0ed72;
 }
