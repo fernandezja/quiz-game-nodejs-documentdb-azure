@@ -1,26 +1,52 @@
 ﻿var express = require('express');
 var router = express.Router();
 
+var config = require('../config');
+var DocumentDBClient = require('documentdb').DocumentClient;
+var RepositorioBase = require('../datos/repositoryBase.js');
+var PartidaRepository = require('../datos/partidaRepository.js');
+
+
+var docDbClient = new DocumentDBClient(config.host, {
+    masterKey: config.authKey
+});
+var repositoryBase = new RepositorioBase(docDbClient, config.databaseId, config.collectionId);
+var partidaRepository = new PartidaRepository(repositoryBase);
+repositoryBase.init();
 
 router.get('/listado', function (req, res) {
-    
-    var partidaVm = {};
-    
-    partidaVm.partidas = [
-        { descripcion: 'Partida 1' },
-        { descripcion: 'Partida 2' }
-    ];
-    
-    res.render('partidaListado', partidaVm);
+    partidaRepository.listado(req, res);
 });
 
 router.get('/crear', function (req, res) {
     
     var partidaVm = {};
-    
-    
     res.render('partidaCrear', partidaVm);
 });
+
+router.post('/crear', function (req, res) {
+    //recuperar partida de body por post
+    var partida = req.body;
+    if (partida === undefined || partida == null) throw (null);
+
+    //creo un view model
+    var vm = {
+        seGuardo: false,
+        mensaje: '',
+        partida: null
+    };
+
+    vm.seGuardo = partidaRepository.guardar(partida);
+
+    if (vm.seGuardo) {
+        vm.partida = partida;
+    } else {
+        vm.mensaje = 'Tuvimos un inconveniente al guardar la partida.' 
+                    + 'Intente nuevamente mas tarde';
+    }
+    res.render('partidaCreada', vm);
+});
+
 
 router.get('/:partidaId/ranking', function (req, res) {
     
@@ -36,22 +62,44 @@ router.get('/:partidaId/ranking', function (req, res) {
         jugadores: [
             {
                 id: 1,
-                apellido: 'Apellido 1',
-                nombre: 'Nombre 1',
-                nickname: 'groso',
+                imagenUrl:"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfa1/v/t1.0-1/1779102_10202676177522122_79691913_n.jpg?oh=a2ea5c9594e67c7dc2df6017086e7ebc&oe=57A53E03&__gda__=1471501827_8c95c69c28c14b2ca072fdb22a322b1c",
+                apellido: 'Fernandez',
+                nombre: 'José',
+                nickname: 'El Profe',
                 puntos: 10,
                 cantidadPreguntasCorrectas: 5,
                 cantidadPreguntasErroneas: 5,
             },
             {
                 id: 2,
-                apellido: 'Apellido 2',
-                nombre: 'Nombre 2',
-                nickname: 'muyGroso',
+                imagenUrl:"https://scontent-gru2-1.xx.fbcdn.net/hphotos-xtl1/v/t1.0-9/10425355_10203649454730210_3179339780669292461_n.jpg?oh=9a3e9d55a058d12d2b25bd50d2482abc&oe=5799909E",
+                apellido: 'Chocron',
+                nombre: 'Cristhian',
+                nickname: 'Tiki',
                 puntos: 12,
                 cantidadPreguntasCorrectas: 7,
                 cantidadPreguntasErroneas: 5,
-            }
+            },
+            {
+                id: 3,
+                imagenUrl:"https://scontent-gru2-1.xx.fbcdn.net/v/t1.0-9/1005540_10207158485233814_6031992102546735600_n.jpg?oh=aca12b88ea7d9bf6f4097282b230aa77&oe=57A24482",
+                apellido: 'Gimenez',
+                nombre: 'Cristian',
+                nickname: 'El Formo',
+                puntos: 15,
+                cantidadPreguntasCorrectas: 10,
+                cantidadPreguntasErroneas: 5,
+            },
+            {
+                id: 4,
+                imagenUrl:"https://scontent-gru2-1.xx.fbcdn.net/v/t1.0-9/11828739_889180801171325_8860912661926570810_n.jpg?oh=f0c69b54e20f9519505dc52a87c573e2&oe=57A158BE",
+                apellido: 'Medina',
+                nombre: 'Enzo',
+                nickname: 'Enzo',
+                puntos: 8,
+                cantidadPreguntasCorrectas: 4,
+                cantidadPreguntasErroneas: 4,
+            },
         ]
     }
     
