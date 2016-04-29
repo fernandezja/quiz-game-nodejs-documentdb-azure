@@ -38,4 +38,4 @@ node_modules
 *.ntvs_analysis.dat
 *.cache
 /.vs/config/applicationhost.config
-*config.js
+/QuizGame/config.js

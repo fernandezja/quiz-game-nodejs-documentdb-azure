@@ -33,7 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
-    <Compile Include="config.js" />
     <Compile Include="datos\partidaRepository.js" />
     <Compile Include="datos\repositoryBase.js" />
     <Compile Include="docdbUtils.js" />
