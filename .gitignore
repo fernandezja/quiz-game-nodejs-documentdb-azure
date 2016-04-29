@@ -37,3 +37,5 @@ node_modules
 *.suo
 *.ntvs_analysis.dat
 *.cache
+/.vs/config/applicationhost.config
+*config.js

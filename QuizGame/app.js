@@ -5,6 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var config = require('./config');
+
+var DocumentDBClient = require('documentdb').DocumentClient;
+var RepositorioBase = require('./datos/repositoryBase.js');
+var PartidaRepository = require('./datos/partidaRepository.js');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var pregunta = require('./routes/pregunta');
@@ -24,6 +30,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+var docDbClient = new DocumentDBClient(config.host, {
+    masterKey: config.authKey
+});
+var repositoryBase = new RepositorioBase(docDbClient, config.databaseId, config.collectionId);
+var partidaRepository = new PartidaRepository(repositoryBase);
+//repositoryBase.init();
 
 app.use('/', routes);
 app.use('/users', users);
