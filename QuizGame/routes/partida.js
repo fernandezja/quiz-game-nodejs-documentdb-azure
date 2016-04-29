@@ -1,26 +1,52 @@
 ﻿var express = require('express');
 var router = express.Router();
 
+var config = require('../config');
+var DocumentDBClient = require('documentdb').DocumentClient;
+var RepositorioBase = require('../datos/repositoryBase.js');
+var PartidaRepository = require('../datos/partidaRepository.js');
+
+
+var docDbClient = new DocumentDBClient(config.host, {
+    masterKey: config.authKey
+});
+var repositoryBase = new RepositorioBase(docDbClient, config.databaseId, config.collectionId);
+var partidaRepository = new PartidaRepository(repositoryBase);
+repositoryBase.init();
 
 router.get('/listado', function (req, res) {
-    
-    var partidaVm = {};
-    
-    partidaVm.partidas = [
-        { descripcion: 'Partida 1' },
-        { descripcion: 'Partida 2' }
-    ];
-    
-    res.render('partidaListado', partidaVm);
+    partidaRepository.listado(req, res);
 });
 
 router.get('/crear', function (req, res) {
     
     var partidaVm = {};
-    
-    
     res.render('partidaCrear', partidaVm);
 });
+
+router.post('/crear', function (req, res) {
+    //recuperar partida de body por post
+    var partida = req.body;
+    if (partida === undefined || partida == null) throw (null);
+
+    //creo un view model
+    var vm = {
+        seGuardo: false,
+        mensaje: '',
+        partida: null
+    };
+
+    vm.seGuardo = partidaRepository.guardar(partida);
+
+    if (vm.seGuardo) {
+        vm.partida = partida;
+    } else {
+        vm.mensaje = 'Tuvimos un inconveniente al guardar la partida.' 
+                    + 'Intente nuevamente mas tarde';
+    }
+    res.render('partidaCreada', vm);
+});
+
 
 router.get('/:partidaId/ranking', function (req, res) {
     
