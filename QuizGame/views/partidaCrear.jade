@@ -16,14 +16,18 @@ block content
           }
 
           function showPosition(position) {
+            var latitud =0;
+            var longitud =0;
+            latitud = position.coords.latitude;
+            longitud = position.coords.longitude;
             console.log('showPosition...')
             var elem = window.document.getElementById('ubicacionTexto');  
             console.log(elem)
-            var latLog = "Lat: " + position.coords.latitude + "Log: " + position.coords.longitude;
+            var latLog = "Lat: " + latitud + "Log: " + longitud;
             console.log(elem)
             elem.innerHTML = latLog
-            //formCrear.latitud.value = lat;
-            //formCrear.longitud.value = log;
+            formCrear.latitud.value = latitud;
+            formCrear.longitud.value = logitud;
            }
           
           function getPosition(position) {
@@ -33,17 +37,17 @@ block content
             longitud = position.coords.longitude;
             formCrear.latitud.value = latitud;
             formCrear.longitud.value = longitud;
-          }
+           }
           
           getLocation();
-          getPosition(position);
+          showPosition(position);
 
   form(name='formCrear', action='/partida/crear', method='post')
         .form-group
         input#nombre.form-control(type='text', name='descripcion', placeholder='descripcion')
         br
-        input#ubicacion.form-control(type='text', name='ubicacion', placeholder='Ubicacion', value='')
-        br
+        //input#ubicacion.form-control(type='text', name='ubicacion', placeholder='Ubicacion')
+        //br
         button.btn.btn-primary.btn-lg(type='submit') Guardar
         input(type='hidden', name='latitud')
         input(type='hidden', name='longitud')
