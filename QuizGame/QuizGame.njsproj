@@ -34,9 +34,6 @@ AUTH_KEY='BqEmzuS6Dz29kIk5PjzG0KJsPc0gNm2cqLbMypr7lTjhRnMvXLheFprXG5HDE9lL1staHI
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="config.js" />
-    <Compile Include="datos\partidaRepository.js" />
-    <Compile Include="datos\repositoryBase.js" />
-    <Compile Include="docdbUtils.js" />
     <Compile Include="routes\partida.js" />
     <Compile Include="routes\pregunta.js" />
     <Compile Include="routes\index.js" />
@@ -58,7 +55,6 @@ AUTH_KEY='BqEmzuS6Dz29kIk5PjzG0KJsPc0gNm2cqLbMypr7lTjhRnMvXLheFprXG5HDE9lL1staHI
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="datos\" />
     <Folder Include="public\" />
     <Folder Include="public\imagenes\" />
     <Folder Include="public\images\" />
