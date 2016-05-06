@@ -30,13 +30,15 @@ PartidaRepository.prototype = {
         });
     },
     
-    guardar: function (item) {
+    guardar: function (item, callback) {
         var self = this;
 
         self.repositoryBase.addItem(item, function (err) {
             if (err) {
                 throw (err);
             }
+
+            callback(item);
         });
     },
 
