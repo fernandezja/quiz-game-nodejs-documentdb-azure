@@ -78,10 +78,12 @@ router.get('/:partidaId/ranking', function (req, res) {
 
     partidaRepository.obtener(partidaId, function (item) {
         rankingVm.partida = item;
+
+        res.render('partidaRanking', rankingVm);
     });
     
     
-    res.render('partidaRanking', rankingVm);
+    
 });
 
 router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
