@@ -7,9 +7,10 @@ block content
         span #{mensaje}
   
       each p in partidas
-          form(action='/partida/id', method='get')
+          form(action='/partida/#{p.id}', method='get')
             div
               button.btn.btn-primary(type="submit") #{p.descripcion}
+              
             br
       br
       br      
