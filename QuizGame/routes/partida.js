@@ -72,12 +72,17 @@ router.get('/:partidaId/ranking', function (req, res) {
     console.log('partidaId:', partidaId);
     
     var rankingVm = {
-        partida: null
+        partida: null,
+        tieneJugadores: false
     };
 
     partidaRepository.obtener(partidaId, function (item) {
         rankingVm.partida = item;
 
+        if (rankingVm.partida.jugadores!= undefined && rankingVm.partida.jugadores.length) { 
+            rankingVm.tieneJugadores = true;
+        }
+        
         res.render('partidaRanking', rankingVm);
     });
     
