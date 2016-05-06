@@ -41,5 +41,18 @@ PartidaRepository.prototype = {
                 throw (err);
             }
         });
+    },
+
+    obtener: function (id, callback) {
+        var self = this;
+    
+    
+        self.repositoryBase.getItem(id, function (err, item) {
+            if (err) {
+                throw (err);
+            }
+            
+            callback(item);
+        });
     }
 };
