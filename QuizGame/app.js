@@ -36,7 +36,7 @@ var docDbClient = new DocumentDBClient(config.host, {
 });
 var repositoryBase = new RepositorioBase(docDbClient, config.databaseId, config.collectionId);
 var partidaRepository = new PartidaRepository(repositoryBase);
-//repositoryBase.init();
+repositoryBase.init();
 
 app.use('/', routes);
 app.use('/users', users);

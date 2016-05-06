@@ -5,13 +5,14 @@ var repositoryBase = require('./repositoryBase');
 
 function PartidaRepository(repositoryBase) {
     this.repositoryBase = repositoryBase;
+
 }
 
 module.exports = PartidaRepository;
 
 PartidaRepository.prototype = {
 
-    listado: function (req, res) {
+    listado: function (callback) {
         var self = this;
         
         var querySpec = {
@@ -24,12 +25,8 @@ PartidaRepository.prototype = {
                 throw (err);
             }
             
-            var partidaVm = {
-                partidas: items
-            };
+            callback(items);
             
-    
-            res.render('partidaListado', partidaVm);
         });
     },
     
@@ -54,5 +51,17 @@ PartidaRepository.prototype = {
             
             callback(item);
         });
+    },
+
+    eliminar: function (id, callback) {
+        var self = this;
+        
+        //self.repositoryBase.delete(id, function (err) {
+        //    if (err) {
+        //        throw (err);
+        //    }
+            
+        //    callback(true);
+        //});
     }
 };

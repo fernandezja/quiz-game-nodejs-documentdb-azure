@@ -15,7 +15,26 @@ var partidaRepository = new PartidaRepository(repositoryBase);
 repositoryBase.init();
 
 router.get('/listado', function (req, res) {
-    partidaRepository.listado(req, res);
+    
+
+    //Creando viewModel para partidas
+   var partidasVm = {
+        mensaje: '',
+        partidas: []
+    };
+
+    //Consultando al repository
+    partidaRepository.listado(function (partidas) {
+        if (partidas != null) {
+            partidasVm.partidas = partidas;
+        } else {
+            partidasVm.mensaje = 'Sin partidas generadas'
+        }
+        
+        res.render('partidaListado', partidasVm);
+    });
+    
+    
 });
 
 router.get('/crear', function (req, res) {
