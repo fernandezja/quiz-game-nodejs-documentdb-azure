@@ -1,1 +1,38 @@
-{"id":"3", "descripcion":"Partida Azure 3"}
+{"id":"5",
+"descripcion":"Partida con JUGADORES 2",
+"jugadores": [{
+                "id": "21",
+                "imagenUrl":"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfa1/v/t1.0-1/1779102_10202676177522122_79691913_n.jpg?oh=a2ea5c9594e67c7dc2df6017086e7ebc&oe=57A53E03&__gda__=1471501827_8c95c69c28c14b2ca072fdb22a322b1c",
+                "apellido": "Fernandez",
+                "nombre": "Jose",
+                "nickname": "El Profe",
+                "puntos": 10,
+                "cantidadPreguntasCorrectas": 5,
+                "cantidadPreguntasErroneas": 5
+            },
+            {
+                "id": "22",
+                "imagenUrl":"https://scontent-gru2-1.xx.fbcdn.net/hphotos-xtl1/v/t1.0-9/10425355_10203649454730210_3179339780669292461_n.jpg?oh=9a3e9d55a058d12d2b25bd50d2482abc&oe=5799909E",
+                "apellido": "Chocron",
+                "nombre": "Cristhian",
+                "nickname": "Tiki",
+                "puntos": 12,
+                "cantidadPreguntasCorrectas": 7,
+                "cantidadPreguntasErroneas": 5
+            },{"id":"23",
+                "imagenUrl":"https://scontent-gru2-1.xx.fbcdn.net/v/t1.0-9/1005540_10207158485233814_6031992102546735600_n.jpg?oh=aca12b88ea7d9bf6f4097282b230aa77&oe=57A24482",
+                "apellido": "Gimenez",
+                "nombre": "Cristian",
+                "nickname": "El Formo",
+                "puntos": 15,
+                "cantidadPreguntasCorrectas": 10,
+                "cantidadPreguntasErroneas": 5
+            },{"id":"24",
+                "imagenUrl":"https://scontent-gru2-1.xx.fbcdn.net/v/t1.0-9/11828739_889180801171325_8860912661926570810_n.jpg?oh=f0c69b54e20f9519505dc52a87c573e2&oe=57A158BE",
+                "apellido": "Medina",
+                "nombre": "Enzo",
+                "nickname": "Enzo",
+                "puntos": 8,
+                "cantidadPreguntasCorrectas": 4,
+                "cantidadPreguntasErroneas": 4}
+]}

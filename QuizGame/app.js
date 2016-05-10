@@ -11,10 +11,15 @@ var DocumentDBClient = require('documentdb').DocumentClient;
 var RepositorioBase = require('./datos/repositoryBase.js');
 var PartidaRepository = require('./datos/partidaRepository.js');
 
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
+
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var pregunta = require('./routes/pregunta');
 var partida = require('./routes/partida');
+var perfil = require('./routes/perfil');
 
 var app = express();
 
@@ -36,12 +41,32 @@ var docDbClient = new DocumentDBClient(config.host, {
 });
 var repositoryBase = new RepositorioBase(docDbClient, config.databaseId, config.collectionId);
 var partidaRepository = new PartidaRepository(repositoryBase);
-//repositoryBase.init();
+repositoryBase.init();
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/pregunta', pregunta);
 app.use('/partida', partida);
+app.use('/perfil', perfil);
+
+
+passport.use(new FacebookStrategy({
+                clientID: config.facebookAppId,
+                clientSecret: config.facebookAppSecret,
+                callbackURL: "http://localhost:1337/auth/facebook/callback" //TODO: Modificar url
+            },
+            function (accessToken, refreshToken, profile, done) {
+                console.log(profile);
+
+            }
+));
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+passport.authenticate('facebook', { successRedirect: '/',
+                                      failureRedirect: '/login' }));
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,16 +1,19 @@
 ﻿extends layout
 
 block content
-      h1 Partidas
-
+      h1 Partidas #{partidas.lenght}
+      
+      div(class="")
+        span #{mensaje}
   
       each p in partidas
-          form(action='/partida/id', method='get')
+          form(action='/partida/#{p.id}', method='get')
             div
               button.btn.btn-primary(type="submit") #{p.descripcion}
+              
             br
       br
       br      
-      form(action="/partida/crear", method="get")
-         div
-            button.btn.btn-primary(type="submit") Crear Partida  
+      a(class="btn btn-default btn-success btn-block ", href="/partida/crear") 
+        i(class="fa fa-plus") 
+        span &nbsp; Nueva partida

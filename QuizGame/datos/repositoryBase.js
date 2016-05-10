@@ -10,7 +10,7 @@ function RepositoryBase (documentDBClient, databaseId, collectionId) {
     this.collection = null;
 }
 
-module.exports = RepositoryBase;
+
 
 RepositoryBase.prototype = {
     init: function (callback) {
@@ -105,3 +105,5 @@ RepositoryBase.prototype = {
         });
     }
 };
+
+module.exports = RepositoryBase;
