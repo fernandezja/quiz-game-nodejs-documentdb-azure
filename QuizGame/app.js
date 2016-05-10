@@ -55,10 +55,11 @@ app.use('/perfil', perfil);
 passport.use(new FacebookStrategy({
                 clientID: config.facebookAppId,
                 clientSecret: config.facebookAppSecret,
-                callbackURL: "http://localhost:1337/auth/facebook/callback" //TODO: Modificar url
+                callbackURL: "http://localhost:1337/auth/facebook/callback", //TODO: Modificar url que tome la actual,
+                profileFields: ['id', 'name', 'picture.type(large)', 'emails', 'displayName', 'about', 'gender'], 
             },
             function (accessToken, refreshToken, profile, cb) {
-                console.log(profile);
+               
                 return cb(null, profile);
             }
 ));
