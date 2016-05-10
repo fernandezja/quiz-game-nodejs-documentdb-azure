@@ -15,7 +15,26 @@ var partidaRepository = new PartidaRepository(repositoryBase);
 repositoryBase.init();
 
 router.get('/listado', function (req, res) {
-    partidaRepository.listado(req, res);
+    
+
+    //Creando viewModel para partidas
+   var partidasVm = {
+        mensaje: '',
+        partidas: []
+    };
+
+    //Consultando al repository
+    partidaRepository.listado(function (partidas) {
+        if (partidas != null) {
+            partidasVm.partidas = partidas;
+        } else {
+            partidasVm.mensaje = 'Sin partidas generadas'
+        }
+        
+        res.render('partidaListado', partidasVm);
+    });
+    
+    
 });
 
 router.get('/crear', function (req, res) {
@@ -25,26 +44,25 @@ router.get('/crear', function (req, res) {
 });
 
 router.post('/crear', function (req, res) {
-    //recuperar partida de body por post
+
+    //Recuperar partida de body por post
     var partida = req.body;
     if (partida === undefined || partida == null) throw (null);
 
-    //creo un view model
-    var vm = {
+    //Vmara
+    var partidaVm = {
         seGuardo: false,
         mensaje: '',
         partida: null
     };
 
-    vm.seGuardo = partidaRepository.guardar(partida);
+    partidaRepository.guardar(partida, function (itemCreado) {
+        partidaVm.partida = itemCreado;
+        partidaVm.seGuardo = true;
+        res.render('partidaCreada', partidaVm);
+    });
 
-    if (vm.seGuardo) {
-        vm.partida = partida;
-    } else {
-        vm.mensaje = 'Tuvimos un inconveniente al guardar la partida.' 
-                    + 'Intente nuevamente mas tarde';
-    }
-    res.render('partidaCreada', vm);
+   
 });
 
 
@@ -54,15 +72,22 @@ router.get('/:partidaId/ranking', function (req, res) {
     console.log('partidaId:', partidaId);
     
     var rankingVm = {
-        partida: null
+        partida: null,
+        tieneJugadores: false
     };
 
     partidaRepository.obtener(partidaId, function (item) {
         rankingVm.partida = item;
+
+        if (rankingVm.partida.jugadores!= undefined && rankingVm.partida.jugadores.length) { 
+            rankingVm.tieneJugadores = true;
+        }
+        
+        res.render('partidaRanking', rankingVm);
     });
     
     
-    res.render('partidaRanking', rankingVm);
+    
 });
 
 router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {

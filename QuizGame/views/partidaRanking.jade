@@ -1,11 +1,13 @@
 ﻿extends layout
 
 block content
-    h1 Partida: #{descripcion}
+    h1 Partida: #{partida.descripcion}
     
+    span Agregar si no hay jugadores!
+
     div(class="row")
         div(class="col-md-12 col-xs-12")
-            each j in jugadores
+            each j in partida.jugadores
                 div(class="jugador")           
                     div(class="col-md-8")
                         div(class="row")

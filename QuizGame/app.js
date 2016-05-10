@@ -15,6 +15,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var pregunta = require('./routes/pregunta');
 var partida = require('./routes/partida');
+var perfil = require('./routes/perfil');
 
 var app = express();
 
@@ -36,12 +37,13 @@ var docDbClient = new DocumentDBClient(config.host, {
 });
 var repositoryBase = new RepositorioBase(docDbClient, config.databaseId, config.collectionId);
 var partidaRepository = new PartidaRepository(repositoryBase);
-//repositoryBase.init();
+repositoryBase.init();
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/pregunta', pregunta);
 app.use('/partida', partida);
+app.use('/perfil', perfil);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
