@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var expressSession = require('express-session');
+
 
 var config = require('./config');
 
@@ -35,6 +37,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 var docDbClient = new DocumentDBClient(config.host, {
     masterKey: config.authKey
@@ -49,23 +52,36 @@ app.use('/pregunta', pregunta);
 app.use('/partida', partida);
 app.use('/perfil', perfil);
 
-
 passport.use(new FacebookStrategy({
                 clientID: config.facebookAppId,
                 clientSecret: config.facebookAppSecret,
                 callbackURL: "http://localhost:1337/auth/facebook/callback" //TODO: Modificar url
             },
-            function (accessToken, refreshToken, profile, done) {
+            function (accessToken, refreshToken, profile, cb) {
                 console.log(profile);
-
+                return cb(null, profile);
             }
 ));
+
+passport.serializeUser(function (user, cb) {
+    cb(null, user);
+});
+
+passport.deserializeUser(function (obj, cb) {
+    cb(null, obj);
+});
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
-passport.authenticate('facebook', { successRedirect: '/',
+passport.authenticate('facebook', { successRedirect: '/main',
                                       failureRedirect: '/login' }));
+
 
 
 // catch 404 and forward to error handler
