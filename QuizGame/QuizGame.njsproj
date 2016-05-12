@@ -50,6 +50,7 @@
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
     <Content Include="views\home.jade" />
+    <Content Include="views\partidaCreada.jade" />
     <Content Include="views\partidaCrear.jade" />
     <Content Include="views\partidaRanking.jade" />
     <Content Include="views\partidaListado.jade" />

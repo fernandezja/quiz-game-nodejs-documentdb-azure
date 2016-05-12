@@ -1,0 +1,17 @@
+﻿extends layout
+
+block content
+  h1 Aceptar
+      .row
+       .col-xs-4.col-xs-4
+       .col-xs-4.col-xs-4
+         form(name='form', action='/partida/listado', method='post')
+            .form-group
+             button.btn.btn-primary.btn-lg(type='submit', onclick) Si
+             br
+         form(name='form2', action='/partida/crear', method='post')
+             .form-group
+             button.btn.btn-primary.btn-lg(type='submit', onclick) No
+           
+
+  
