@@ -51,8 +51,8 @@ app.use('/perfil', perfil);
 
 
 passport.use(new FacebookStrategy({
-                clientID: config.facebookAppId,
-                clientSecret: config.facebookAppSecret,
+                clientID: "577413365800506",
+                clientSecret: "c48552637398b3882fcfc654dfe39a48",
                 callbackURL: "http://localhost:1337/auth/facebook/callback" //TODO: Modificar url
             },
             function (accessToken, refreshToken, profile, done) {
