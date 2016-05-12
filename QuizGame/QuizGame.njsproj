@@ -37,6 +37,7 @@
     <Compile Include="datos\partidaRepository.js" />
     <Compile Include="datos\repositoryBase.js" />
     <Compile Include="docdbUtils.js" />
+    <Compile Include="routesApi\partidaApi.js" />
     <Compile Include="routesApi\preguntaApi.js" />
     <Compile Include="routes\perfil.js" />
     <Compile Include="routes\partida.js" />
