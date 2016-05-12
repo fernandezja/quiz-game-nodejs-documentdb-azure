@@ -51,6 +51,7 @@
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
     <Content Include="views\home.jade" />
+    <Content Include="views\includes\layoutEncabezado.jade" />
     <Content Include="views\partidaCrear.jade" />
     <Content Include="views\partidaRanking.jade" />
     <Content Include="views\partidaListado.jade" />
@@ -70,6 +71,7 @@
     <Folder Include="public\stylesheets\" />
     <Folder Include="routes\" />
     <Folder Include="views\" />
+    <Folder Include="views\includes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />
