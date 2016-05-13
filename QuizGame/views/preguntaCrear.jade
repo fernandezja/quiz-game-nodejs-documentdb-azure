@@ -1,21 +1,9 @@
 extends layout
 
 block content
-  h1 Crear Pregunta
-         script.
-           function checkCorrecta() {
-              var esCorrecta = document.forms[0];
-              var txt = "";
-              var i;
-              for (i = 0; i < esCorrecta.length; i++) {
-                  if (esCorrecta[i].checked) {
-                    txt = txt + esCorrecta[i].value + " ";
-                  }
-              }
-              document.getElementById().checked = true;
-            }
-          
-         form(action='/pregunta/nueva', method='post')
+  h1 Crear pregunta
+         
+         form(action='/pregunta/crear', method='post')
           .form-group
             
              h2 Pregunta:
@@ -27,21 +15,21 @@ block content
              h2 Respuesta:
              br
 
-             input(type='radio', name='esCorrecta', value='descripcion1', checked='', id="respuesta1")
-             input#nombre.form-control(type='text', name='descripcion1', placeholder='respuesta 1')
+             input(type='radio', name='respuestaCorrecta', value='1', checked='', id="respuestaCorrecta1")
+             input#nombre.form-control(type='text', name='respuestaDescripcion1', placeholder='respuesta 1')
              br
 
-             input(type='radio', name='esCorrecta', value='descripcion2', id="respuesta2")
-             input#nombre.form-control(type='text', name='descripcion2', placeholder='respuesta 2')
+             input(type='radio', name='respuestaCorrecta', value='2', id="respuestaCorrect2")
+             input#nombre.form-control(type='text', name='respuestaDescripcion2', placeholder='respuesta 2')
              br
 
-             input(type='radio', name='esCorrecta', value='descripcion3', id="respuesta3")
-             input#nombre.form-control(type='text', name='descripcion3', placeholder='respuesta 3')
+             input(type='radio', name='respuestaCorrecta', value='3', id="respuestaCorrecta3")
+             input#nombre.form-control(type='text', name='respuestaDescripcion3', placeholder='respuesta 3')
              br
 
-             input(type='radio', name='esCorrecta', value='descripcion4', id="respuesta4")
-             input#nombre.form-control(type='text', name='descripcion4', placeholder='respuesta 4')
+             input(type='radio', name='respuestaCorrecta', value='4', id="respuestaCorrecta4")
+             input#nombre.form-control(type='text', name='respuestaDescripcion4', placeholder='respuesta 4')
              br
              
-             button.btn.btn-primary.btn-lg(type='submit', onclick="checkCorrecta()") Guardar
+             button.btn.btn-primary.btn-lg(type='submit') Guardar
              
