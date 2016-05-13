@@ -24,6 +24,7 @@ var partida = require('./routes/partida');
 var perfil = require('./routes/perfil');
 
 var preguntaApi = require('./routesApi/preguntaApi');
+var rankingApi = require('./routesApi/rankingApi');
 var perfilApi = require('./routesApi/perfilApi');
 var partidaApi = require('./routesApi/partidaApi');
 
@@ -57,6 +58,7 @@ app.use('/partida', partida);
 app.use('/perfil', perfil);
 
 app.use('/api/pregunta', preguntaApi);
+app.use('/api/ranking', rankingApi);
 app.use('/api/partida', partidaApi);
 app.use('/api/perfil', perfilApi);
 
@@ -73,6 +75,9 @@ passport.use(new FacebookStrategy({
 ));
 
 passport.serializeUser(function (user, cb) {
+    app.locals.usuarioNombreCompleto = user.displayName;
+    app.locals.usuarioImagenUrl = user.photos[0].value;
+    
     cb(null, user);
 });
 
@@ -92,13 +97,22 @@ passport.authenticate('facebook', { successRedirect: '/main',
                                       failureRedirect: '/login' }));
 
 
-
-// catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
+
+//User
+//app.all('*', function (req, res, next) {
+//    if (req.session.passport.user) {
+//        res.locals.username = usuario.displayName;
+//        res.locals.username = usuario.photos[0].value;
+//        app.locals.username = usuario.displayName;
+//        app.locals.username = usuario.photos[0].value;
+//    };
+//    next();
+//});
 
 // error handlers
 

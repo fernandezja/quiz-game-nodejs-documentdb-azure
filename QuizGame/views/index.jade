@@ -6,7 +6,8 @@ block content
         div(class="col-md-12") &nbsp;   
         div(class="col-md-12") 
             div(class="col-md-1")
-                img(class="img-responsive",src="#{usuario.photos[0].value}", alt="#{usuario.displayName}")
+                a(href="#",title="#{usuario.displayName}")
+                    img(class="img-responsive",src="#{usuario.photos[0].value}", alt="#{usuario.displayName}")
             div(class="col-md-6") 
                 h2 
                     span Hola &nbsp;
@@ -17,6 +18,17 @@ block content
             a(class="btn btn-default btn-primary btn-block ", href="/partida/listado")
                 i(class="fa fa-list-uk") 
                 span &nbsp; Partidas
+            p &nbsp;
             a(class="btn btn-default btn-success btn-block ", href="/partida/crear") 
                 i(class="fa fa-plus") 
                 span &nbsp; Nueva partida
+            p &nbsp;
+            p &nbsp;
+            a(class="btn btn-default btn-primary btn-block ", href="/pregunta/listado")
+                i(class="fa fa-list-uk") 
+                span &nbsp; Preguntas
+            p &nbsp;
+            a(class="btn btn-default btn-success btn-block ", href="/pregunta/crear") 
+                i(class="fa fa-plus") 
+                span &nbsp; Nueva pregunta
+        
