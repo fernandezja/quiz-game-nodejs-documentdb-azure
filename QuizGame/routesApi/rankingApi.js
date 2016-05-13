@@ -1,88 +1,55 @@
 ﻿var express = require('express');
 var router = express.Router();
 
+var config = require('../config');
+var DocumentDBClient = require('documentdb').DocumentClient;
+var RepositorioBase = require('../datos/repositoryBase.js');
+var PartidaRepository = require('../datos/partidaRepository.js');
 
-router.get('/:preguntaId/', function (req, res) {
-    
-    var preguntadId = req.params.preguntaId;
-    
-    var pregunta = {
-        id : preguntadId,
-        descripcion: '¿Pregunta Demo '+ preguntadId+'?',
-        respuestas: [
-            {
-                id: 1,
-                descripcion: 'Rta 1',
-                esCorrecta: false,
-            },
-            {
-                id: 2,
-                descripcion: 'Rta 2',
-                esCorrecta: true,
-            },
-            {
-                id: 3,
-                descripcion: 'Rta 3',
-                esCorrecta: false,
-            }
-        ]
-    }
-    
 
-    res.json(pregunta);
+var docDbClient = new DocumentDBClient(config.host, {
+    masterKey: config.authKey
 });
+var repositoryBase = new RepositorioBase(docDbClient, config.databaseId, config.collectionId);
+var partidaRepository = new PartidaRepository(repositoryBase);
+repositoryBase.init();
 
-router.get('/', function (req, res) {
-    
-    var preguntas = [];
-    for (var i = 1; i < 100; i++) {
-    
-        var pregunta = {
-            id : i,
-            descripcion: '¿Pregunta Demo ' + i + '?',
-            respuestas: [
-                {
-                    id: 1,
-                    descripcion: 'Rta 1',
-                    esCorrecta: false,
-                },
-                {
-                    id: 2,
-                    descripcion: 'Rta 2',
-                    esCorrecta: true,
-                },
-                {
-                    id: 3,
-                    descripcion: 'Rta 3',
-                    esCorrecta: false,
-                }
-            ]
+
+
+
+router.get('/:partidaId', function (req, res) {
+
+    var partidaId = req.params.partidaId;
+    console.log('partidaId:', partidaId);
+
+    var rankingVm = {
+        partida: null,
+        tieneJugadores: false
+    };
+
+    partidaRepository.obtener(partidaId, function (item) {
+        rankingVm.partida = item;
+
+        if (rankingVm.partida.jugadores != undefined && rankingVm.partida.jugadores.length) {
+            rankingVm.tieneJugadores = true;
         }
 
-        preguntas.push(pregunta);
-    };
-    
-    res.json(preguntas);
+        var ranking = {
+            partida: partidaId,
+            jugadores: rankingVm.partida.jugadores,
+            puntos: rankingVm.puntos,
+        }
+
+
+        res.json('partidaRanking', ranking);
+    });
+
+
+
 });
 
-router.delete('/:preguntaId', function (req, res) {
-    
-    var preguntadId = req.params.preguntaId;
-    
-    var respuesta = {
-        mensaje: 'Se a eliminado correctamente la pregunta con el ID ' + preguntadId,
-        resultado: true
-    }
-    res.json(respuesta);
-});
 
-router.post('/', function (req, res) {
-    
-    var pregunta = req.body;
-    if (pregunta === undefined || pregunta == null) res.json('Debe enviar una pregunta valida'); ;
-    
-    res.json(pregunta);
-});
+
 
 
 module.exports = router;

@@ -38,6 +38,7 @@
     <Compile Include="datos\repositoryBase.js" />
     <Compile Include="docdbUtils.js" />
     <Compile Include="routesApi\perfilApi.js" />
+    <Compile Include="routesApi\rankingApi.js" />
     <Compile Include="routesApi\preguntaApi.js" />
     <Compile Include="routes\perfil.js" />
     <Compile Include="routes\partida.js" />
