@@ -24,6 +24,7 @@ var partida = require('./routes/partida');
 var perfil = require('./routes/perfil');
 
 var preguntaApi = require('./routesApi/preguntaApi');
+var rankingApi = require('./routesApi/rankingApi');
 
 var app = express();
 
@@ -55,6 +56,7 @@ app.use('/partida', partida);
 app.use('/perfil', perfil);
 
 app.use('/api/pregunta', preguntaApi);
+app.use('/api/ranking', rankingApi);
 
 passport.use(new FacebookStrategy({
                 clientID: config.facebookAppId,
