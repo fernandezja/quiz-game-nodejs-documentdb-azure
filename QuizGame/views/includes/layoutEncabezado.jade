@@ -1,0 +1,30 @@
+﻿nav(class="navbar navbar-inverse navbar-fixed-top quizgame-nav")
+    div(class="usuario float-right", style="float:right;")
+        a(href="#",title="#{usuarioNombreCompleto}")
+            img(style="max-width:50px !important;", class="img-responsive",src="#{usuarioImagenUrl}", alt="#{usuarioNombreCompleto}")
+        
+
+    div(class="navbar-header")
+        
+        button(type="button", class="navbar-toggle collapsed", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar")
+            span(class="sr-only") Toggle navigation
+            span(class="icon-bar")
+            span(class="icon-bar")
+            span(class="icon-bar")
+        a(class="navbar-brand", href="#")
+            img(class="navbar-brand", src="/imagenes/QuizGame-Logo.png")
+
+    div(id="navbar",class="collapse navbar-collapse")
+        ul(class="nav navbar-nav")
+            li(class="active")
+                a(href="/main") Principal
+            li
+                a(href="/partida/listado") Partidas
+            li
+                a(href="/partida/crear") Crear partida
+            li
+                a(href="/info/acercaDe") Acerca de
+            li
+                a(href="/info/contacto") Contacto
+
+    

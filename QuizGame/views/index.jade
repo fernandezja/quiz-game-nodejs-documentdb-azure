@@ -6,7 +6,8 @@ block content
         div(class="col-md-12") &nbsp;   
         div(class="col-md-12") 
             div(class="col-md-1")
-                img(class="img-responsive",src="#{usuario.photos[0].value}", alt="#{usuario.displayName}")
+                a(href="#",title="#{usuario.displayName}")
+                    img(class="img-responsive",src="#{usuario.photos[0].value}", alt="#{usuario.displayName}")
             div(class="col-md-6") 
                 h2 
                     span Hola &nbsp;
