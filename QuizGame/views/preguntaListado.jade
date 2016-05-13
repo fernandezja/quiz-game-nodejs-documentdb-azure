@@ -7,7 +7,7 @@ block content
         span #{mensaje}
   
       each p in preguntas
-          form(action='', method='get')
+          form(action='/preguntas/#{p.id}', method='get')
             div
               button.btn.btn-primary(type="submit") #{p.descripcion}
               
