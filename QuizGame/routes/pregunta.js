@@ -11,7 +11,7 @@ var PreguntaRepository = require('../datos/preguntaRepository.js');
 var docDbClient = new DocumentDBClient(config.host, {
     masterKey: config.authKey
 });
-var repositoryBase = new RepositorioBase(docDbClient, config.databaseId, config.collectionId);
+var repositoryBase = new RepositorioBase(docDbClient, config.databaseId, config.collectionPreguntas);
 var preguntaRepository = new PreguntaRepository(repositoryBase);
 repositoryBase.init();
 
@@ -54,6 +54,27 @@ router.get('/partida/:partidaId/pregunta/:preguntaId', function (req, res) {
     
 
     res.render('pregunta', preguntaVm);
+});
+
+router.get('/listado', function (req, res) {
+    
+    var preguntasVm = {
+        mensaje: '',
+        preguntas: []
+    };
+    
+    //Consultando al repository
+    preguntaRepository.listado(function (items) {
+        if (items != null) {
+            preguntasVm.preguntas = items;
+        } else {
+            preguntasVm.mensaje = 'Sin partidas generadas'
+        }
+        
+        res.render('preguntaListado', preguntasVm);
+    });
+    
+    
 });
 
 

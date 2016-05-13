@@ -53,6 +53,7 @@
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
     <Content Include="views\home.jade" />
+    <Content Include="views\preguntaListado.jade" />
     <Content Include="views\preguntaCreada.jade" />
     <Content Include="views\partidaCreada.jade" />
     <Content Include="views\includes\layoutEncabezado.jade" />
