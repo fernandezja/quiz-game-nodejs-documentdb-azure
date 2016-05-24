@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Ajax</title>
+</head>
+<body>
+    <h1 id="pregunta">Cargando...</h1>
+    <p>
+        <span id="respuesta1"></span>
+        <br>
+        <span id="respuesta2"></span>
+        <br>
+        <span id="respuesta3"></span>
+        <br>
+    </p>
+    <script>
+        var xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState===4 && xmlhttp.status===200) {
+                
+
+                var pregunta = JSON.parse(xmlhttp.responseText);
+                
+                document.getElementById('pregunta').innerHTML = pregunta.descripcion;
+                document.getElementById('respuesta1').innerHTML = pregunta.respuestas[0].descripcion;
+                document.getElementById('respuesta2').innerHTML = pregunta.respuestas[1].descripcion;
+                document.getElementById('respuesta3').innerHTML = pregunta.respuestas[2].descripcion;
+            }
+        };
+
+       
+        xmlhttp.open('GET', '/api/pregunta/44', true);
+        xmlhttp.send();
+
+      
+
+
+
+    </script>
+</body>
+</html>

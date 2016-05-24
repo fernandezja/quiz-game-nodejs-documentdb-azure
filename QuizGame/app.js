@@ -60,6 +60,8 @@ app.use('/api/pregunta', preguntaApi);
 app.use('/api/ranking', rankingApi);
 app.use('/api/perfil', perfilApi);
 
+
+
 passport.use(new FacebookStrategy({
                 clientID: config.facebookAppId,
                 clientSecret: config.facebookAppSecret,
