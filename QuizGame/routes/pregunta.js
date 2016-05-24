@@ -77,12 +77,53 @@ router.get('/listado', function (req, res) {
     
 });
 
+router.get('/crear', function (req, res) {
+    
+    var preguntaVm = {};
+    res.render('preguntaCrear', preguntaVm);
+});
+
 
 router.post('/crear', function (req, res) {
     
-    var pregunta = req.body;
-    if (pregunta === undefined || pregunta == null) throw (null);
+    var preguntaForm = req.body;
+    if (preguntaForm === undefined || preguntaForm == null) throw (null);
     
+    //Armando pregunta
+    var pregunta = {
+        descripcion: preguntaForm.descripcion,
+        respuestas: []
+    }
+    
+    if (preguntaForm.respuestaDescripcion1) {
+        pregunta.respuestas.push({
+            descripcion: preguntaForm.respuestaDescripcion1,
+            esCorrecta: (preguntaForm.respuestaCorrecta==1)
+        });
+    }
+    
+    if (preguntaForm.respuestaDescripcion2) {
+        pregunta.respuestas.push({
+            descripcion: preguntaForm.respuestaDescripcion2,
+            esCorrecta: (preguntaForm.respuestaCorrecta == 2)
+        });
+    }
+    
+    if (preguntaForm.respuestaDescripcion3) {
+        pregunta.respuestas.push({
+            descripcion: preguntaForm.respuestaDescripcion3,
+            esCorrecta: (preguntaForm.respuestaCorrecta == 3)
+        });
+    }
+    
+    if (preguntaForm.respuestaDescripcion4) {
+        pregunta.respuestas.push({
+            descripcion: preguntaForm.respuestaDescripcion4,
+            esCorrecta: (preguntaForm.respuestaCorrecta == 4)
+        });
+    }
+    
+
     //Vmara
     var preguntaVm = {
         pregunta: null,
@@ -90,7 +131,7 @@ router.post('/crear', function (req, res) {
     };
     
     preguntaRepository.guardar(pregunta, function (itemCreado) {
-        preguntaVm.partida = itemCreado;
+        preguntaVm.pregunta = itemCreado;
         preguntaVm.seGuardo = true;
         res.render('preguntaCreada', preguntaVm);
     });

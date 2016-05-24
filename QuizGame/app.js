@@ -26,6 +26,7 @@ var perfil = require('./routes/perfil');
 var preguntaApi = require('./routesApi/preguntaApi');
 var rankingApi = require('./routesApi/rankingApi');
 var perfilApi = require('./routesApi/perfilApi');
+var partidaApi = require('./routesApi/partidaApi');
 
 var app = express();
 
@@ -58,6 +59,7 @@ app.use('/perfil', perfil);
 
 app.use('/api/pregunta', preguntaApi);
 app.use('/api/ranking', rankingApi);
+app.use('/api/partida', partidaApi);
 app.use('/api/perfil', perfilApi);
 
 

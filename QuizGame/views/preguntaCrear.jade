@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1 Crear pregunta
+         
+         form(action='/pregunta/crear', method='post')
+          .form-group
+            
+             h2 Pregunta:
+             br
+             textarea(name='descripcion', cols='25', rows='5')
+             br 
+             br
+
+             h2 Respuesta:
+             br
+
+             input(type='radio', name='respuestaCorrecta', value='1', checked='', id="respuestaCorrecta1")
+             input#nombre.form-control(type='text', name='respuestaDescripcion1', placeholder='respuesta 1')
+             br
+
+             input(type='radio', name='respuestaCorrecta', value='2', id="respuestaCorrect2")
+             input#nombre.form-control(type='text', name='respuestaDescripcion2', placeholder='respuesta 2')
+             br
+
+             input(type='radio', name='respuestaCorrecta', value='3', id="respuestaCorrecta3")
+             input#nombre.form-control(type='text', name='respuestaDescripcion3', placeholder='respuesta 3')
+             br
+
+             input(type='radio', name='respuestaCorrecta', value='4', id="respuestaCorrecta4")
+             input#nombre.form-control(type='text', name='respuestaDescripcion4', placeholder='respuesta 4')
+             br
+             
+             button.btn.btn-primary.btn-lg(type='submit') Guardar
+             
