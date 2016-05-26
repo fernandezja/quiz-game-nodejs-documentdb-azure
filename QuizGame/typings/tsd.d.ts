@@ -16,3 +16,4 @@
 /// <reference path="serve-static/serve-static.d.ts" />
 /// <reference path="stylus/stylus.d.ts" />
 /// <reference path="passport-local/passport-local.d.ts" />
+/// <reference path="randomstring/randomstring.d.ts" />

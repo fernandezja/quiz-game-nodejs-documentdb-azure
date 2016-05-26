@@ -19,6 +19,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 //login invitado
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var randomuser = require("randomstring");
 
 
 var routes = require('./routes/index');
@@ -79,7 +80,10 @@ passport.use(new LocalStrategy({
         process.nextTick(function () {
             var user = {
                 id: 1,
-                displayName: username
+                displayName: username + ' '+ randomuser.generate({    
+                    length: 2,
+                    charset: 'numeric'
+                }),
             };
 
             return cb(null, user);

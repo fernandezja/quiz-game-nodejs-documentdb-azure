@@ -95,6 +95,7 @@
     <Folder Include="typings\passport-facebook\" />
     <Folder Include="typings\passport-local\" />
     <Folder Include="typings\passport\" />
+    <Folder Include="typings\randomstring\" />
     <Folder Include="typings\serve-favicon\" />
     <Folder Include="typings\serve-static\" />
     <Folder Include="typings\stylus\" />
@@ -125,6 +126,7 @@
     <TypeScriptCompile Include="typings\passport-facebook\passport-facebook.d.ts" />
     <TypeScriptCompile Include="typings\passport-local\passport-local.d.ts" />
     <TypeScriptCompile Include="typings\passport\passport.d.ts" />
+    <TypeScriptCompile Include="typings\randomstring\randomstring.d.ts" />
     <TypeScriptCompile Include="typings\serve-favicon\serve-favicon.d.ts" />
     <TypeScriptCompile Include="typings\serve-static\serve-static.d.ts" />
     <TypeScriptCompile Include="typings\stylus\stylus.d.ts" />
