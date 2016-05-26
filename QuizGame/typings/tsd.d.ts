@@ -15,3 +15,4 @@
 /// <reference path="serve-favicon/serve-favicon.d.ts" />
 /// <reference path="serve-static/serve-static.d.ts" />
 /// <reference path="stylus/stylus.d.ts" />
+/// <reference path="passport-local/passport-local.d.ts" />

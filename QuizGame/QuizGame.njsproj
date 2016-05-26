@@ -55,6 +55,7 @@
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
     <Content Include="views\home.jade" />
+    <Content Include="views\UserLocal.jade" />
     <Content Include="views\preguntaCrear.jade" />
     <Content Include="views\preguntaListado.jade" />
     <Content Include="views\preguntaCreada.jade" />
@@ -92,6 +93,7 @@
     <Folder Include="typings\morgan\" />
     <Folder Include="typings\node\" />
     <Folder Include="typings\passport-facebook\" />
+    <Folder Include="typings\passport-local\" />
     <Folder Include="typings\passport\" />
     <Folder Include="typings\serve-favicon\" />
     <Folder Include="typings\serve-static\" />
@@ -121,6 +123,7 @@
     <TypeScriptCompile Include="typings\morgan\morgan.d.ts" />
     <TypeScriptCompile Include="typings\node\node.d.ts" />
     <TypeScriptCompile Include="typings\passport-facebook\passport-facebook.d.ts" />
+    <TypeScriptCompile Include="typings\passport-local\passport-local.d.ts" />
     <TypeScriptCompile Include="typings\passport\passport.d.ts" />
     <TypeScriptCompile Include="typings\serve-favicon\serve-favicon.d.ts" />
     <TypeScriptCompile Include="typings\serve-static\serve-static.d.ts" />
