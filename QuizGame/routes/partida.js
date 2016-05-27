@@ -105,10 +105,14 @@ router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
     console.log('preguntadId:', preguntadId);
     console.log('respuestaId:', respuestaId);
     
+    if (preguntadId==0) {
+        preguntadId = null;
+    }
     
     var partidaPreguntaVm = {
         partida: { id: partidaId },
         preguntaActual: null,
+        preguntaSiguiente: null,
         preguntas: [],
         respuestaId: respuestaId,
         tieneRespuesta: (respuestaId != undefined),
@@ -118,6 +122,9 @@ router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
     
     //Consultando al repository
     preguntaRepository.listado(function (items) {
+        
+        //TODO: Ver de quitar preguntas ya respondidas por el usuario en la partida
+
         if (items != null) {
             shuffle(items);
             partidaPreguntaVm.preguntas = items;
@@ -131,9 +138,14 @@ router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
         } else {            
             partidaPreguntaVm.preguntaActual = partidaPreguntaVm.preguntas[0];
         }
-       
         
-        shuffle(partidaPreguntaVm.preguntaActual.respuestas);
+        //TODO: Ver de quitar preguntas ya respondidas por el usuario en la partida
+        partidaPreguntaVm.preguntaSiguiente = partidaPreguntaVm.preguntas[1];
+
+       
+        //if (respuestaId===undefined || respuestaId==null) {
+        //    shuffle(partidaPreguntaVm.preguntaActual.respuestas);
+        //}
 
         for (var i = 0; i < partidaPreguntaVm.preguntaActual.respuestas.length; i++) {
             var r = partidaPreguntaVm.preguntaActual.respuestas[i];
@@ -167,7 +179,7 @@ router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
 router.get('/:partidaId/', function (req, res) {
     var partidaId = req.params.partidaId;
     //IR a una pregunta alteatoria
-    res.redirect('/partida/'+ partidaId+'/pregunta/1');
+    res.redirect('/partida/'+ partidaId+'/pregunta/0');
 });
 
 

@@ -5,7 +5,6 @@ var repositoryBase = require('./repositoryBase');
 
 function PreguntaRepository(repositoryBase) {
     this.repositoryBase = repositoryBase;
-
 }
 
 module.exports = PreguntaRepository;
