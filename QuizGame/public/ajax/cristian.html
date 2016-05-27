@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1 id="preguntaDescripcion"> Cargando....</h1>   
+
+    <span id="respuesta1"></span>
+    <!--<span id="esCorrecta1"></span>-->
+    <br />
+    <span id="respuesta2"></span>
+    <br />
+    <span id="respuesta3"></span>
+
+    
+    <script>
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            //console.log('Cambio de estado');
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                //console.log(xmlhttp.responseText);
+
+                var pregunta = JSON.parse(xmlhttp.responseText);
+                console.log(pregunta.descripcion);
+
+                document.getElementById('preguntaDescripcion').innerHTML = pregunta.descripcion;
+
+                console.log(pregunta.respuestas[0]);
+                console.log(pregunta.respuestas[1]);
+                console.log(pregunta.respuestas[2]);
+
+                document.getElementById("respuesta1").innerHTML = pregunta.respuestas[0].descripcion;
+                //document.getElementById("esCorrecta1").innerHTML = pregunta.respuestas[0].esCorrecta;
+                document.getElementById("respuesta2").innerHTML = pregunta.respuestas[1].descripcion;
+                document.getElementById("respuesta3").innerHTML = pregunta.respuestas[2].descripcion;
+                //document.getElementById('respuestas').innerHTML = pregunta.respuestas;
+            }
+        };
+        
+        xmlhttp.open('GET', '/api/pregunta/44', true);
+
+        xmlhttp.send();
+
+    </script> 
+</body>
+</html>
