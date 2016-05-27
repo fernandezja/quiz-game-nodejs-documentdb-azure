@@ -103,7 +103,34 @@ RepositoryBase.prototype = {
                 callback(null, results[0]);
             }
         });
+    },
+
+    deleteItem: function (itemId, callback) {
+        var self = this;
+        
+        self.getItem(itemId, function (err, item) {
+            
+            if (err) {
+                callback(err);
+            }
+
+            console.log(item);
+            console.log(item._self);
+            
+            
+            self.client.deleteDocument(item._self, function (err, deleted, resHeaders) {
+                if (err) {
+                    callback(err);
+                } else {
+                    callback(null, item, true);
+                }
+            });
+
+
+        });
+        
     }
+
 };
 
 module.exports = RepositoryBase;

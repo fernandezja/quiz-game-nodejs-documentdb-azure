@@ -58,7 +58,7 @@ PartidaRepository.prototype = {
     eliminar: function (id, callback) {
         var self = this;
         
-        //self.repositoryBase.delete(id, function (err) {
+        //self.repositoryBase.deleteItem(id, function (err) {
         //    if (err) {
         //        throw (err);
         //    }
