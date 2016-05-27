@@ -45,12 +45,10 @@ PreguntaRepository.prototype = {
     obtener: function (id, callback) {
         var self = this;
     
-    
         self.repositoryBase.getItem(id, function (err, item) {
             if (err) {
                 throw (err);
             }
-            
             callback(item);
         });
     },
@@ -58,12 +56,11 @@ PreguntaRepository.prototype = {
     eliminar: function (id, callback) {
         var self = this;
         
-        //self.repositoryBase.delete(id, function (err) {
-        //    if (err) {
-        //        throw (err);
-        //    }
-            
-        //    callback(true);
-        //});
+        self.repositoryBase.deleteItem(id, function (err, itemEliminado, seElimino) {
+            if (err) {
+                throw (err);
+            }
+            callback(itemEliminado, seElimino);
+        });
     }
 };

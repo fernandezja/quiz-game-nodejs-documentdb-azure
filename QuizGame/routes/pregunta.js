@@ -83,7 +83,6 @@ router.get('/crear', function (req, res) {
     res.render('preguntaCrear', preguntaVm);
 });
 
-
 router.post('/crear', function (req, res) {
     
     var preguntaForm = req.body;
@@ -136,15 +135,27 @@ router.post('/crear', function (req, res) {
         res.render('preguntaCreada', preguntaVm);
     });
 
-    preguntaRepository.borrar(pregunta, function (itemCreado) {
-        preguntaVm.pregunta = itemCreado;
-        preguntaVm.seGuardo = true;
-        res.render('preguntaCreada', preguntaVm);
+});
+
+router.post('/eliminar/:preguntaId', function (req, res) {
+    
+    var preguntaId = req.params.preguntaId;
+    if (preguntaId === undefined || preguntaId == null) throw (null);
+    
+    
+    //Vmara
+    var preguntaVm = {
+        pregunta: null,
+        seElimino: false,
+    };
+
+    preguntaRepository.eliminar(preguntaId, function (preguntaEliminada, seElimino) {
+        preguntaVm.pregunta = preguntaEliminada; //Ver de obtener la pregunta que se elimino
+        preguntaVm.seElimino = seElimino;
+        res.render('preguntaEliminada', preguntaVm);
     });
 
    
 });
-
-
 
 module.exports = router;
