@@ -2,8 +2,8 @@ extends layout
 
 block content
   h1 Crear pregunta
-         
-         form(action='/pregunta/crear', method='post')
+
+         form(name='myForm', action='/pregunta/crear', method='post', autocomplete='off')
           .form-group
             
              h2 Pregunta:
@@ -31,5 +31,5 @@ block content
              input#nombre.form-control(type='text', name='respuestaDescripcion4', placeholder='respuesta 4')
              br
              
-             button.btn.btn-primary.btn-lg(type='submit') Guardar
+             button.btn.btn-primary.btn-lg(type='submit', value='Reset') Guardar
              

@@ -136,6 +136,12 @@ router.post('/crear', function (req, res) {
         res.render('preguntaCreada', preguntaVm);
     });
 
+    preguntaRepository.borrar(pregunta, function (itemCreado) {
+        preguntaVm.pregunta = itemCreado;
+        preguntaVm.seGuardo = true;
+        res.render('preguntaCreada', preguntaVm);
+    });
+
    
 });
 

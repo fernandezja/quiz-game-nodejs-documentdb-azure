@@ -6,16 +6,16 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "node/node.d.ts": {
-      "commit": "1ec3d510e0c4d7c50e708ca7cb0765c7e06fa2ed"
+      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
     },
     "body-parser/body-parser.d.ts": {
       "commit": "1ec3d510e0c4d7c50e708ca7cb0765c7e06fa2ed"
     },
     "express/express.d.ts": {
-      "commit": "1ec3d510e0c4d7c50e708ca7cb0765c7e06fa2ed"
+      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
     },
     "express-serve-static-core/express-serve-static-core.d.ts": {
-      "commit": "1ec3d510e0c4d7c50e708ca7cb0765c7e06fa2ed"
+      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
     },
     "cookie-parser/cookie-parser.d.ts": {
       "commit": "1ec3d510e0c4d7c50e708ca7cb0765c7e06fa2ed"
@@ -39,22 +39,28 @@
       "commit": "1ec3d510e0c4d7c50e708ca7cb0765c7e06fa2ed"
     },
     "passport/passport.d.ts": {
-      "commit": "1ec3d510e0c4d7c50e708ca7cb0765c7e06fa2ed"
+      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
     },
     "stylus/stylus.d.ts": {
       "commit": "1ec3d510e0c4d7c50e708ca7cb0765c7e06fa2ed"
     },
     "mime/mime.d.ts": {
-      "commit": "1ec3d510e0c4d7c50e708ca7cb0765c7e06fa2ed"
+      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
     },
     "serve-favicon/serve-favicon.d.ts": {
       "commit": "1ec3d510e0c4d7c50e708ca7cb0765c7e06fa2ed"
     },
     "serve-static/serve-static.d.ts": {
-      "commit": "1ec3d510e0c4d7c50e708ca7cb0765c7e06fa2ed"
+      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
     },
     "async/async.d.ts": {
       "commit": "1ec3d510e0c4d7c50e708ca7cb0765c7e06fa2ed"
+    },
+    "passport-local/passport-local.d.ts": {
+      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
+    },
+    "randomstring/randomstring.d.ts": {
+      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
     }
   }
 }

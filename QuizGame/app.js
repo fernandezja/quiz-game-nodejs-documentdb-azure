@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 
 
+
 var config = require('./config');
 
 var DocumentDBClient = require('documentdb').DocumentClient;
@@ -15,6 +16,10 @@ var PartidaRepository = require('./datos/partidaRepository.js');
 
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+//login invitado
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var randomuser = require("randomstring");
 
 
 var routes = require('./routes/index');
@@ -44,12 +49,71 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
+
 var docDbClient = new DocumentDBClient(config.host, {
     masterKey: config.authKey
 });
 var repositoryBase = new RepositorioBase(docDbClient, config.databaseId, config.collectionId);
 var partidaRepository = new PartidaRepository(repositoryBase);
 repositoryBase.init();
+
+
+//facebook
+passport.use(new FacebookStrategy({
+    clientID: config.facebookAppId,
+    clientSecret: config.facebookAppSecret,
+    callbackURL: "http://localhost:1337/auth/facebook/callback", //TODO: Modificar url que tome la actual,
+    profileFields: ['id', 'name', 'picture.type(large)', 'emails', 'displayName', 'about', 'gender'],
+},
+    function (accessToken, refreshToken, profile, cb) {
+
+        return cb(null, profile);
+    }
+));
+
+
+//Invitado 
+passport.use(new LocalStrategy({
+    profileFields: ['id',  'displayName'],
+},
+    function (username, password, cb) {
+        process.nextTick(function () {
+            var user = {
+                id: 1,
+                displayName: username + ' '+ randomuser.generate({    
+                    length: 2,
+                    charset: 'numeric'
+                }),
+            };
+
+            return cb(null, user);
+        
+    });
+}));
+
+
+passport.serializeUser(function (user, cb) {
+    app.locals.usuarioNombreCompleto = user.displayName;
+
+    if (user.photos) {
+        app.locals.usuarioImagenUrl = user.photos[0].value;
+    } else {
+        app.locals.usuarioImagenUrl = '/imagenes/usuario-anonimo.png'; 
+    }
+    
+
+    cb(null, user);
+});
+
+passport.deserializeUser(function (obj, cb) {
+    cb(null, obj);
+});
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 app.use('/', routes);
 app.use('/users', users);
@@ -62,32 +126,8 @@ app.use('/api/ranking', rankingApi);
 app.use('/api/partida', partidaApi);
 app.use('/api/perfil', perfilApi);
 
-passport.use(new FacebookStrategy({
-                clientID: config.facebookAppId,
-                clientSecret: config.facebookAppSecret,
-                callbackURL: "http://localhost:1337/auth/facebook/callback", //TODO: Modificar url que tome la actual,
-                profileFields: ['id', 'name', 'picture.type(large)', 'emails', 'displayName', 'about', 'gender'], 
-            },
-            function (accessToken, refreshToken, profile, cb) {
-               
-                return cb(null, profile);
-            }
-));
-
-passport.serializeUser(function (user, cb) {
-    app.locals.usuarioNombreCompleto = user.displayName;
-    app.locals.usuarioImagenUrl = user.photos[0].value;
-    
-    cb(null, user);
-});
-
-passport.deserializeUser(function (obj, cb) {
-    cb(null, obj);
-});
 
 
-app.use(passport.initialize());
-app.use(passport.session());
 
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
@@ -137,6 +177,9 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
+
+
+
 
 
 module.exports = app;
