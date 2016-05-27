@@ -119,6 +119,7 @@ router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
     //Consultando al repository
     preguntaRepository.listado(function (items) {
         if (items != null) {
+            shuffle(items);
             partidaPreguntaVm.preguntas = items;
         } else {
             partidaPreguntaVm.mensaje = 'Sin partidas generadas'
@@ -131,6 +132,7 @@ router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
             var r = partidaPreguntaVm.preguntaActual.respuestas[i];
             
             //fix para respuestas sin id definido
+            //TODO: Hashear la respuesta id con el usuario para que el id sea diferente siempre
             if (r.id===undefined) {
                 r.id = i;
             }
@@ -161,6 +163,17 @@ router.get('/:partidaId/', function (req, res) {
     res.redirect('/partida/'+ partidaId+'/pregunta/1');
 });
 
+
+//TODO: llevar a un modeulo Util o similar
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length; i; i -= 1) {
+        j = Math.floor(Math.random() * i);
+        x = a[i - 1];
+        a[i - 1] = a[j];
+        a[j] = x;
+    }
+};
 
 
 
