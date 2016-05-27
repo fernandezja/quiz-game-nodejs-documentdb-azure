@@ -8,9 +8,11 @@ block content
   
       each p in preguntas
           form(action='', method='get')
-            div
-              button.btn.btn-primary(type="submit") #{p.descripcion}             
-            br
+              //div
+              button.btn.btn-primary(type="submit") #{p.descripcion}
+          form(action='/pregunta/eliminar/#{p.id}', method='post')
+              button.btn.btn-danger(type="submit") Eliminar
+              br
+              br
       br
-      br      
      
