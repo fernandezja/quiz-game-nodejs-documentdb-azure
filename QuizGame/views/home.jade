@@ -13,12 +13,22 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body(class="home")
 
+  
+             
+
     div(class="container")
         div(class="row")
             div(class="col-md-12")
                 a(href="/")
                     img(class="img-responsive", src="/imagenes/QuizGame-Splash.png")
-             
+
+                form(action="/auth/invitado", method="POST")
+                    button(class="btn btn-block  btn-social btn-google", type="submit", name="btn")
+                        span(class="fa fa-user")
+                        span Ingrese como invitado
+                    input(type="hidden", value="Invitado", name="username")
+                    input(type="hidden", value="4321", name="password")
+
                 a(class="btn btn-block btn-social btn-facebook", href="/auth/facebook")
                     span(class="fa fa-facebook")
                     span Ingrese con Facebook
