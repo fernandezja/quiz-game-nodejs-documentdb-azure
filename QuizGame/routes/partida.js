@@ -125,9 +125,16 @@ router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
             partidaPreguntaVm.mensaje = 'Sin partidas generadas'
         }
         
+        //Ver si no es la pregunta actual
+        if (preguntadId) {
+            partidaPreguntaVm.preguntaActual = get(partidaPreguntaVm.preguntas, preguntadId);
+        } else {            
+            partidaPreguntaVm.preguntaActual = partidaPreguntaVm.preguntas[0];
+        }
+       
         
-        partidaPreguntaVm.preguntaActual = partidaPreguntaVm.preguntas[0];
-        
+        shuffle(partidaPreguntaVm.preguntaActual.respuestas);
+
         for (var i = 0; i < partidaPreguntaVm.preguntaActual.respuestas.length; i++) {
             var r = partidaPreguntaVm.preguntaActual.respuestas[i];
             
@@ -173,6 +180,17 @@ function shuffle(a) {
         a[i - 1] = a[j];
         a[j] = x;
     }
+};
+
+//TODO: llevar a un modeulo Util o similar
+function get(a, id) {
+    for (var i = 0; i < a.length; i++) {
+        var item = a[i];
+        if (item.id=== id) {
+            return item; 
+        }
+    };
+    return null;
 };
 
 
