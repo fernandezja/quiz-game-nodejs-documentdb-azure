@@ -8,10 +8,13 @@ block content
   
       each p in preguntas
           form(action='', method='get')
-            div
+              //div
               button.btn.btn-primary(type="submit") #{p.descripcion}
-              
+          form(action='/pregunta/#{p.id}', method='post')
+              button.btn.btn-danger(type="submit") Eliminar    
+                br
             br
+            
       br
       br      
      
