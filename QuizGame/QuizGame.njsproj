@@ -58,7 +58,6 @@
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
     <Content Include="views\home.jade" />
-    <Content Include="views\UserLocal.jade" />
     <Content Include="views\preguntaCrear.jade" />
     <Content Include="views\preguntaListado.jade" />
     <Content Include="views\preguntaCreada.jade" />
