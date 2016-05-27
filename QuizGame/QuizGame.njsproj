@@ -49,6 +49,9 @@
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Content Include="package.json" />
+    <Content Include="public\ajax\cristian.html" />
+    <Content Include="public\jquery\jose.html" />
+    <Content Include="public\ajax\jose.html" />
     <Content Include="public\imagenes\QuizGame-Logo.png" />
     <Content Include="public\imagenes\QuizGame-Splash.png" />
     <Content Include="public\stylesheets\bootstrap-social.css" />
@@ -71,6 +74,8 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="datos\" />
+    <Folder Include="public\ajax\" />
+    <Folder Include="public\jquery\" />
     <Folder Include="routesApi\" />
     <Folder Include="public\" />
     <Folder Include="public\imagenes\" />
