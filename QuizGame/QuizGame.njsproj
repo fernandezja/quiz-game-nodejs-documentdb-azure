@@ -67,7 +67,7 @@
     <Content Include="views\partidaCrear.jade" />
     <Content Include="views\partidaRanking.jade" />
     <Content Include="views\partidaListado.jade" />
-    <Content Include="views\pregunta.jade" />
+    <Content Include="views\partidaPregunta.jade" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
     <Content Include="views\error.jade" />

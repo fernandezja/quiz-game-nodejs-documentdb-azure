@@ -1,0 +1,78 @@
+﻿extends layout
+
+block content
+
+    div(class="row")
+        
+        div(class="col-md-12")
+            div(class="pregunta-partida")
+                span Esta es la partida de ejemplo para ver el titulo ok?
+            h2(data-id="#{preguntaActual.id}") #{preguntaActual.descripcion}
+            
+        div(class="col-md-12")
+            each r in preguntaActual.respuestas
+                div(class="form-group")
+                    if (!tieneRespuesta)
+                        form(action="/partida/#{partida.id}/pregunta/#{preguntaActual.id}", method="get")                    
+                            input(class="btn btn-default btn-block #{r.css}", type="submit", name="respuesta", value="#{r.descripcion} ")
+                            input(class="btn btn-default", type="hidden", name="respuestaId", value="#{r.id}")
+                    else
+                        input(class="btn btn-default btn-block #{r.css}", type="button", name="respuesta", value="#{r.descripcion} ")
+        
+        if (tieneRespuesta)
+            div(class="col-md-12 text-center")
+                i(class="fa fa-circle-o-notch fa-spin fa-3x fa-fw margin-bottom")
+                br
+                span(class="") Proxima pregunta en 
+                span(id="segundosParaProximaPregunta") 5 
+                span(class="") &nbsp; segundos...
+                 
+            script.
+                var contador = 5;
+                setInterval(function(){
+                    contador--;
+                    document.getElementById('segundosParaProximaPregunta').innerHTML = contador;
+                    if (contador == 1) {
+                        window.location = '/partida/#{partida.id}/pregunta/#{preguntaActual.id}'; 
+                    }
+                },1000);
+
+    div(class="row")
+        div(class="col-md-12")
+            span(class="fa-stack")
+                i(class="fa fa-circle fa-stack-2x")
+                i(class="fa fa-check fa-stack-1x fa-inverse")
+
+            span(class="fa-stack")
+                i(class="fa fa-circle fa-stack-2x")
+                i(class="fa fa-times fa-stack-1x fa-inverse")
+
+            span(class="fa-stack")
+                i(class="fa fa-circle fa-stack-2x")
+                i(class="fa fa-dot-circle-o fa-stack-1x fa-inverse")
+
+            span(class="fa-stack")
+                i(class="fa fa-circle fa-stack-2x")
+                i(class="fa fa-stack-1x fa-inverse")
+
+            span(class="fa-stack")
+                i(class="fa fa-circle fa-stack-2x")
+                i(class="fa fa-stack-1x fa-inverse")
+
+            span(class="fa-stack")
+                i(class="fa fa-circle fa-stack-2x")
+                i(class="fa fa-stack-1x fa-inverse")
+
+            span(class="fa-stack")
+                i(class="fa fa-circle fa-stack-2x")
+                i(class="fa fa-stack-1x fa-inverse")
+
+            span(class="fa-stack")
+                i(class="fa fa-circle fa-stack-2x")
+                i(class="fa fa-stack-1x fa-inverse")
+
+    div(class="row")
+        div(class="col-md-12")
+            a(class="btn btn-success col-md-3 col-sm-3", href="/partida/#{partida.id}/ranking") Ranking
+        
+            a(class="btn btn-primary col-md-3 col-sm-3",href="/partida/listado") Otras partidas... 
