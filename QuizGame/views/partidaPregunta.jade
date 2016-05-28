@@ -33,7 +33,7 @@ block content
                     contador--;
                     document.getElementById('segundosParaProximaPregunta').innerHTML = contador;
                     if (contador == 1) {
-                        window.location = '/partida/#{partida.id}/pregunta/#{preguntaActual.id}'; 
+                        window.location = '/partida/#{partida.id}/pregunta/#{preguntaSiguiente.id}'; 
                     }
                 },1000);
 
