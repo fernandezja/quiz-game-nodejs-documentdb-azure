@@ -153,7 +153,7 @@ router.post('/eliminar/:preguntaId', function (req, res) {
     preguntaRepository.eliminar(preguntaId, function (preguntaEliminada, seElimino) {
         preguntaVm.pregunta = preguntaEliminada; //Ver de obtener la pregunta que se elimino
         preguntaVm.seElimino = seElimino;
-        res.render('preguntaEliminada', preguntaVm);
+        res.render('preguntaEliminar', preguntaVm);
     });
 
    
