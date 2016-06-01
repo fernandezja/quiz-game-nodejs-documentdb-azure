@@ -7,10 +7,11 @@ block content
         span #{mensaje}
   
       each p in preguntas
+         div
           form(action='', method='get')
-              //div
+              div
               button.btn.btn-primary(type="submit") #{p.descripcion}
-          form(action='/pregunta/eliminar/#{p.id}', method='post')
+          form(action='/pregunta/#{p.id}', method='post')
               button.btn.btn-danger(type="submit") Eliminar
               br
               br
