@@ -33,32 +33,38 @@ JugadorRepository.prototype = {
     guardar: function (item, callback) {
         var self = this;
         
-        var proveedor = item.proveedor || '';
+        var provider = item.provider || '';
         var id = item.id || '';
+        
+        var jugadorParaGuardar = {
+            identificador: provider+'-'+id,
+            displayName: item.displayName,
+            imagenUrl: null
+        }
 
-        item.identificador = proveedor+'-'+id;
+        if (item.photos) {
+            jugador.imagenUrl = item.photos[0].value;
+        } else {
+            jugador.imagenUrl = '/imagenes/usuario-anonimo.png';
+        }
 
-        self.repositoryBase.addItem(item, function (err) {
+
+        self.repositoryBase.addItem(jugadorParaGuardar, function (err) {
             if (err) {
                 throw (err);
             }
-
             callback(item);
         });
     },
 
     obtener: function (id, callback) {
         var self = this;
-    
-    
         self.repositoryBase.getItem(id, function (err, item) {
             if (err) {
                 throw (err);
             }
-            
             callback(item);
         });
-
     },
     
     obtenerPorIdentificacion: function (identificador, callback) {
@@ -130,7 +136,7 @@ JugadorRepository.prototype = {
                 throw (err);
             }
             
-            if (item == null) {
+            if (item == null || item.length === 0) {
                 usuario.identificador = identificador;
                 self.guardar(usuario, function (err, itemGuardado) {
                     if (err) {
@@ -138,9 +144,11 @@ JugadorRepository.prototype = {
                     }
                     callback(itemGuardado);
                 })
+            } else { 
+                callback(item[0]);
             }
 
-            callback(item);
+           
         });
     },
 

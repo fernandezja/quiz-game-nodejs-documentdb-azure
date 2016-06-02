@@ -25,7 +25,7 @@ var repositoryBaseParaJugada = new RepositorioBase(docDbClient, config.databaseI
 var jugadaRepository = new PreguntaRepository(repositoryBaseParaJugada);
 repositoryBaseParaJugada.init();
 
-var repositoryBaseParaJugador = new RepositorioBase(docDbClient, config.databaseId, config.collectionJugador);
+var repositoryBaseParaJugador = new RepositorioBase(docDbClient, config.databaseId, config.collectionJugadores);
 var jugadorRepository = new JugadorRepository(repositoryBaseParaJugador);
 repositoryBaseParaJugador.init();
 
