@@ -34,6 +34,8 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="config.js" />
+    <Compile Include="datos\jugadorRepository.js" />
+    <Compile Include="datos\jugadaRepository.js" />
     <Compile Include="datos\preguntaRepository.js" />
     <Compile Include="datos\partidaRepository.js" />
     <Compile Include="datos\repositoryBase.js" />

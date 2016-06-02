@@ -6,6 +6,7 @@ var DocumentDBClient = require('documentdb').DocumentClient;
 var RepositorioBase = require('../datos/repositoryBase.js');
 var PartidaRepository = require('../datos/partidaRepository.js');
 var PreguntaRepository = require('../datos/preguntaRepository.js');
+var JugadaRepository = require('../datos/jugadaRepository.js');
 
 var docDbClient = new DocumentDBClient(config.host, {
     masterKey: config.authKey
@@ -18,6 +19,10 @@ repositoryBaseParaPartida.init();
 var repositoryBaseParaPregunta = new RepositorioBase(docDbClient, config.databaseId, config.collectionPreguntas);
 var preguntaRepository = new PreguntaRepository(repositoryBaseParaPregunta);
 repositoryBaseParaPregunta.init();
+
+var repositoryBaseParaJugada = new RepositorioBase(docDbClient, config.databaseId, config.collectionJugadas);
+var jugadaRepository = new PreguntaRepository(repositoryBaseParaJugada);
+repositoryBaseParaJugada.init();
 
 
 router.get('/listado', function (req, res) {
@@ -105,72 +110,114 @@ router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
     console.log('preguntadId:', preguntadId);
     console.log('respuestaId:', respuestaId);
     
+    var usuario = null;
+    if (req.session.passport.user) {
+        usuario = req.session.passport.user;
+    };
+    
     if (preguntadId==0) {
         preguntadId = null;
     }
     
     var partidaPreguntaVm = {
-        partida: { id: partidaId },
+        partida: null,
         preguntaActual: null,
         preguntaSiguiente: null,
         preguntas: [],
         respuestaId: respuestaId,
+        respuestaEstado:null,
         tieneRespuesta: (respuestaId != undefined),
+        
         mensaje:''
     };
-
     
-    //Consultando al repository
-    preguntaRepository.listado(function (items) {
-        
-        //TODO: Ver de quitar preguntas ya respondidas por el usuario en la partida
+    //Consultando Partida
+    partidaRepository.obtener(partidaId, function (partidaActual) {
+        partidaPreguntaVm.partida = partidaActual;
 
-        if (items != null) {
-            shuffle(items);
-            partidaPreguntaVm.preguntas = items;
-        } else {
-            partidaPreguntaVm.mensaje = 'Sin partidas generadas'
-        }
-        
-        //Ver si no es la pregunta actual
-        if (preguntadId) {
-            partidaPreguntaVm.preguntaActual = get(partidaPreguntaVm.preguntas, preguntadId);
-        } else {            
-            partidaPreguntaVm.preguntaActual = partidaPreguntaVm.preguntas[0];
-        }
-        
-        //TODO: Ver de quitar preguntas ya respondidas por el usuario en la partida
-        partidaPreguntaVm.preguntaSiguiente = partidaPreguntaVm.preguntas[1];
 
-       
-        //if (respuestaId===undefined || respuestaId==null) {
-        //    shuffle(partidaPreguntaVm.preguntaActual.respuestas);
-        //}
-
-        for (var i = 0; i < partidaPreguntaVm.preguntaActual.respuestas.length; i++) {
-            var r = partidaPreguntaVm.preguntaActual.respuestas[i];
+        
+        //Consultando Preguntas
+        preguntaRepository.listado(function (items) {
             
-            //fix para respuestas sin id definido
-            //TODO: Hashear la respuesta id con el usuario para que el id sea diferente siempre
-            if (r.id===undefined) {
-                r.id = i;
-            }
-
-            if (r.id == respuestaId) {
-                if (r.esCorrecta) {
-                    r.css = 'btn-success';
-                } else {
-                    r.css = 'btn-danger';
-                }
+            //TODO: Ver de quitar preguntas ya respondidas por el usuario en la partida
             
+            if (items != null) {
+                shuffle(items);
+                partidaPreguntaVm.preguntas = items;
             } else {
-                r.css = '';
+                partidaPreguntaVm.mensaje = 'Sin partidas generadas'
             }
+            
+            //Ver si no es la pregunta actual
+            if (preguntadId) {
+                partidaPreguntaVm.preguntaActual = get(partidaPreguntaVm.preguntas, preguntadId);
+            } else {
+                partidaPreguntaVm.preguntaActual = partidaPreguntaVm.preguntas[0];
+            }
+            
+            //TODO: Ver de quitar preguntas ya respondidas por el usuario en la partida
+            partidaPreguntaVm.preguntaSiguiente = partidaPreguntaVm.preguntas[1];
+            
+            
+            //if (respuestaId===undefined || respuestaId==null) {
+            //    shuffle(partidaPreguntaVm.preguntaActual.respuestas);
+            //}
+            
+            for (var i = 0; i < partidaPreguntaVm.preguntaActual.respuestas.length; i++) {
+                var r = partidaPreguntaVm.preguntaActual.respuestas[i];
+                
+                //fix para respuestas sin id definido
+                //TODO: Hashear la respuesta id con el usuario para que el id sea diferente siempre
+                if (r.id === undefined) {
+                    r.id = i;
+                }
+                
+                if (r.id == respuestaId) {
+                    if (r.esCorrecta) {
+                        partidaPreguntaVm.respuestaEstado = true;
+                        r.css = 'btn-success';
+                    } else {
+                        partidaPreguntaVm.respuestaEstado = false;
+                        r.css = 'btn-danger';
+                    }
+            
+                } else {
+                    r.css = '';
+                }
         
-        };
-        
-        res.render('partidaPregunta', partidaPreguntaVm);
+            };
+            
+            //Guardando respuesta
+            if (respuestaId != null && partidaPreguntaVm.respuestaEstado) {
+                
+                partidaPreguntaVm.partida.jugadas = partidaPreguntaVm.partida.jugadas || [];
+
+                var jugada = {
+                    usuarioId: usuario.id,
+                    partidaId: partidaPreguntaVm.partida.id,
+                    preguntaId: partidaPreguntaVm.preguntaActual.id,
+                    respuestaEstado: partidaPreguntaVm.respuestaEstado,
+                    fecha: new Date()
+                };
+
+                //Guardando partida
+                jugadaRepository.guardar(jugada, function (jugadaGuardada) { 
+                
+                    res.render('partidaPregunta', partidaPreguntaVm);
+                })
+
+            } else {
+                res.render('partidaPregunta', partidaPreguntaVm);
+            }
+            
+           
+            
+        });
+
     });
+    
+    
     
     
 });
