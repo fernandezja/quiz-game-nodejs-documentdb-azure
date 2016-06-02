@@ -40,6 +40,8 @@
     <Compile Include="datos\partidaRepository.js" />
     <Compile Include="datos\repositoryBase.js" />
     <Compile Include="docdbUtils.js" />
+    <Compile Include="routesApi\dashBoardApi.js" />
+    <Compile Include="routesApi\jugadasApi.js" />
     <Compile Include="routesApi\partidaApi.js" />
     <Compile Include="routesApi\perfilApi.js" />
     <Compile Include="routesApi\rankingApi.js" />
@@ -59,6 +61,7 @@
     <Content Include="public\stylesheets\bootstrap-social.css" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
+    <Content Include="views\dashboartAdmin.jade" />
     <Content Include="views\home.jade" />
     <Content Include="views\preguntaCrear.jade" />
     <Content Include="views\preguntaEliminar.jade" />

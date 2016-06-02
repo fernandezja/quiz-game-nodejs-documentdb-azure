@@ -59,4 +59,18 @@ router.post('/', function (req, res) {
 });
 
 
+
+router.get('/:partidas/', function (req, res) {
+
+    //ruta para api/partidas/fechaInicio/fechaTope
+
+
+
+
+
+
+    res.json();
+});
+
+
 module.exports = router;
