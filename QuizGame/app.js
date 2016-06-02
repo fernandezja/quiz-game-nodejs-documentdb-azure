@@ -93,6 +93,7 @@ passport.use(new LocalStrategy({
 
 
 passport.serializeUser(function (user, cb) {
+    app.locals.id = user.id;
     app.locals.usuarioNombreCompleto = user.displayName;
 
     if (user.photos) {
