@@ -7,6 +7,7 @@ var RepositorioBase = require('../datos/repositoryBase.js');
 var PartidaRepository = require('../datos/partidaRepository.js');
 var PreguntaRepository = require('../datos/preguntaRepository.js');
 var JugadaRepository = require('../datos/jugadaRepository.js');
+var JugadorRepository = require('../datos/jugadorRepository.js');
 
 var docDbClient = new DocumentDBClient(config.host, {
     masterKey: config.authKey
@@ -24,6 +25,9 @@ var repositoryBaseParaJugada = new RepositorioBase(docDbClient, config.databaseI
 var jugadaRepository = new PreguntaRepository(repositoryBaseParaJugada);
 repositoryBaseParaJugada.init();
 
+var repositoryBaseParaJugador = new RepositorioBase(docDbClient, config.databaseId, config.collectionJugador);
+var jugadorRepository = new JugadorRepository(repositoryBaseParaJugador);
+repositoryBaseParaJugador.init();
 
 router.get('/listado', function (req, res) {
     
@@ -194,24 +198,35 @@ router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
                 partidaPreguntaVm.partida.jugadas = partidaPreguntaVm.partida.jugadas || [];
 
                 var jugada = {
-                    usuarioId: usuario.id,
+                    jugadorId: null,
                     partidaId: partidaPreguntaVm.partida.id,
                     preguntaId: partidaPreguntaVm.preguntaActual.id,
                     respuestaEstado: partidaPreguntaVm.respuestaEstado,
                     fecha: new Date()
                 };
-
-                //Guardando partida
-                jugadaRepository.guardar(jugada, function (jugadaGuardada) { 
                 
-                    res.render('partidaPregunta', partidaPreguntaVm);
-                })
+                jugadorRepository.obtenerPorUsuarioOCrear(usuario, function (jugador) {
+                    
+                    if (jugador != null) {
+                        //Guardando jugador
+                        jugada.jugadorId = jugador.id;
+                        
+                        //Guardando partida
+                        jugadaRepository.guardar(jugada, function (jugadaGuardada) {
+                            res.render('partidaPregunta', partidaPreguntaVm);
+                        })
+
+                    } else { 
+                        //Imprimiendo respuesta pero sin guardar el jugador
+                        res.render('partidaPregunta', partidaPreguntaVm);
+                    }
+                   
+                });
+
 
             } else {
                 res.render('partidaPregunta', partidaPreguntaVm);
             }
-            
-           
             
         });
 

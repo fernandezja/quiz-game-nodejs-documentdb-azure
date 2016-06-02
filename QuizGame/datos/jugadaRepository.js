@@ -34,15 +34,17 @@ JugadaRepository.prototype = {
         var self = this;
         
         var querySpec = {
-            query: 'SELECT * FROM root r',
-            parameters: []
+            query: 'SELECT * FROM root r WHERE r.partidaId = @partidaId',
+            parameters: [{
+                    name: '@partidaId',
+                    value: partidaId
+                }]
         };
         
         self.repositoryBase.find(querySpec, function (err, items) {
             if (err) {
                 throw (err);
-            }
-            
+            }            
             callback(items);
             
         });
@@ -52,8 +54,15 @@ JugadaRepository.prototype = {
         var self = this;
         
         var querySpec = {
-            query: 'SELECT * FROM root r',
-            parameters: []
+            query: 'SELECT * FROM root r WHERE r.partidaId = @partidaId && r.jugadorId = @jugadorId',
+            parameters: [{
+                    name: '@partidaId',
+                    value: partidaId
+                },
+                {
+                    name: '@jugadorId',
+                    value: jugadorId
+                }]
         };
         
         self.repositoryBase.find(querySpec, function (err, items) {
