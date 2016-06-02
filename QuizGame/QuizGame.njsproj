@@ -44,6 +44,7 @@
     <Compile Include="routesApi\perfilApi.js" />
     <Compile Include="routesApi\rankingApi.js" />
     <Compile Include="routesApi\preguntaApi.js" />
+    <Compile Include="routes\dashboardAdmin.js" />
     <Compile Include="routes\perfil.js" />
     <Compile Include="routes\partida.js" />
     <Compile Include="routes\pregunta.js" />
@@ -59,7 +60,7 @@
     <Content Include="public\stylesheets\bootstrap-social.css" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
-    <Content Include="views\dashboartAdmin.jade" />
+    <Content Include="views\dashboardAdmin.jade" />
     <Content Include="views\home.jade" />
     <Content Include="views\preguntaCrear.jade" />
     <Content Include="views\preguntaEliminar.jade" />
