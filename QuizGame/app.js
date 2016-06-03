@@ -93,16 +93,7 @@ passport.use(new LocalStrategy({
 
 
 passport.serializeUser(function (user, cb) {
-    app.locals.id = user.id;
-    app.locals.usuarioNombreCompleto = user.displayName;
-
-    if (user.photos) {
-        app.locals.usuarioImagenUrl = user.photos[0].value;
-    } else {
-        app.locals.usuarioImagenUrl = '/imagenes/usuario-anonimo.png'; 
-    }
-    
-
+   
     cb(null, user);
 });
 
@@ -113,6 +104,35 @@ passport.deserializeUser(function (obj, cb) {
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+app.use(function (req, res, next) {
+    
+    res.locals.anonimo = true;
+    res.locals.autenticado = false;
+    
+    //res.usuario = null;
+    if (req.session.passport && req.session.passport.user!=null) {
+        
+        //Autenticado
+        res.locals.anonimo = false;
+        res.locals.autenticado = true;
+        
+        var user = req.session.passport.user;
+        res.locals.usuario = user;
+        res.locals.usuario.nombreCompleto = user.displayName;
+        
+        res.locals.usuario.imagenUrl = null;
+        if (user.photos) {
+            res.locals.usuario.imagenUrl = user.photos[0].value;
+        } else {
+            res.locals.usuario.imagenUrl = '/imagenes/usuario-anonimo.png';
+        }
+
+    };
+    
+    next();
+});
 
 
 
@@ -127,7 +147,11 @@ app.use('/api/ranking', rankingApi);
 app.use('/api/partida', partidaApi);
 app.use('/api/perfil', perfilApi);
 
-
+app.use('/logoff', function (req, res) {
+    req.logout();
+    req.session.destroy();
+    res.redirect('/');
+});
 
 
 
@@ -144,16 +168,7 @@ app.use(function (req, res, next) {
     next(err);
 });
 
-//User
-//app.all('*', function (req, res, next) {
-//    if (req.session.passport.user) {
-//        res.locals.username = usuario.displayName;
-//        res.locals.username = usuario.photos[0].value;
-//        app.locals.username = usuario.displayName;
-//        app.locals.username = usuario.photos[0].value;
-//    };
-//    next();
-//});
+
 
 // error handlers
 
