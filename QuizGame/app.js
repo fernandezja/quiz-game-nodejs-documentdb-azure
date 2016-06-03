@@ -13,6 +13,7 @@ var config = require('./config');
 var DocumentDBClient = require('documentdb').DocumentClient;
 var RepositorioBase = require('./datos/repositoryBase.js');
 var PartidaRepository = require('./datos/partidaRepository.js');
+var JugadorRepository = require('./datos/jugadorRepository.js');
 
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -56,6 +57,11 @@ var docDbClient = new DocumentDBClient(config.host, {
 var repositoryBase = new RepositorioBase(docDbClient, config.databaseId, config.collectionId);
 var partidaRepository = new PartidaRepository(repositoryBase);
 repositoryBase.init();
+
+
+var repositoryBaseParaJugador = new RepositorioBase(docDbClient, config.databaseId, config.collectionJugadores);
+var jugadorRepository = new JugadorRepository(repositoryBaseParaJugador);
+repositoryBaseParaJugador.init();
 
 
 //facebook
@@ -112,26 +118,38 @@ app.use(function (req, res, next) {
     res.locals.autenticado = false;
     
     //res.usuario = null;
-    if (req.session.passport && req.session.passport.user!=null) {
-        
-        //Autenticado
-        res.locals.anonimo = false;
-        res.locals.autenticado = true;
+    if (req.session.passport && req.session.passport.user != null) {
         
         var user = req.session.passport.user;
-        res.locals.usuario = user;
-        res.locals.usuario.nombreCompleto = user.displayName;
-        
-        res.locals.usuario.imagenUrl = null;
-        if (user.photos) {
-            res.locals.usuario.imagenUrl = user.photos[0].value;
-        } else {
-            res.locals.usuario.imagenUrl = '/imagenes/usuario-anonimo.png';
-        }
 
+        jugadorRepository.obtenerPorUsuarioOCrear(user, function (jugador) {
+            
+            //Autenticado
+            res.locals.anonimo = false;
+            res.locals.autenticado = true;
+           
+            res.locals.usuario = user;
+            res.locals.usuario.nombreCompleto = user.displayName;
+
+            res.locals.usuario.jugadorId = null
+            if (jugador) res.locals.usuario.jugadorId = jugador.id; //Si es usuario anonimo
+            
+            res.locals.usuario.imagenUrl = null;
+            if (user.photos) {
+                res.locals.usuario.imagenUrl = user.photos[0].value;
+            } else {
+                res.locals.usuario.imagenUrl = '/imagenes/usuario-anonimo.png';
+            }
+
+            next();
+        });
+      
+      
+    } else { 
+        next();
     };
     
-    next();
+    
 });
 
 

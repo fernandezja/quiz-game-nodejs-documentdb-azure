@@ -107,6 +107,11 @@ router.get('/:partidaId/ranking', function (req, res) {
 
 router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
     
+    //Verificar si esta autenticado
+    if (res.locals.anonimo) res.redirect('/');
+    
+    
+    
     var partidaId = req.params.partidaId;
     var preguntadId = req.params.preguntaId;
     var respuestaId = req.query.respuestaId;
@@ -114,10 +119,7 @@ router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
     console.log('preguntadId:', preguntadId);
     console.log('respuestaId:', respuestaId);
     
-    var usuario = null;
-    if (req.session.passport.user) {
-        usuario = req.session.passport.user;
-    };
+    var usuario = res.locals.usuario;
     
     if (preguntadId==0) {
         preguntadId = null;
@@ -144,6 +146,9 @@ router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
         //Consultando Preguntas
         preguntaRepository.listado(function (items) {
             
+            //jugadaRepository.listadoPorPartidaJugador(partidaId, jugadorId, function () { 
+            
+            //});
             //TODO: Ver de quitar preguntas ya respondidas por el usuario en la partida
             
             if (items != null) {
@@ -196,32 +201,27 @@ router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
             if (respuestaId != null && partidaPreguntaVm.respuestaEstado) {
                 
                 partidaPreguntaVm.partida.jugadas = partidaPreguntaVm.partida.jugadas || [];
-
-                var jugada = {
-                    jugadorId: null,
-                    partidaId: partidaPreguntaVm.partida.id,
-                    preguntaId: partidaPreguntaVm.preguntaActual.id,
-                    respuestaEstado: partidaPreguntaVm.respuestaEstado,
-                    fecha: new Date()
-                };
                 
-                jugadorRepository.obtenerPorUsuarioOCrear(usuario, function (jugador) {
-                    
-                    if (jugador != null) {
-                        //Guardando jugador
-                        jugada.jugadorId = jugador.id;
-                        
-                        //Guardando partida
-                        jugadaRepository.guardar(jugada, function (jugadaGuardada) {
-                            res.render('partidaPregunta', partidaPreguntaVm);
-                        })
+                if (usuario.jugadorId) {
 
-                    } else { 
-                        //Imprimiendo respuesta pero sin guardar el jugador
+                    //Guardando jugada
+                    var jugada = {
+                        jugadorId: usuario.jugadorId,
+                        partidaId: partidaPreguntaVm.partida.id,
+                        preguntaId: partidaPreguntaVm.preguntaActual.id,
+                        respuestaEstado: partidaPreguntaVm.respuestaEstado,
+                        fecha: new Date()
+                    };
+                    
+                    //Guardando partida
+                    jugadaRepository.guardar(jugada, function (jugadaGuardada) {
                         res.render('partidaPregunta', partidaPreguntaVm);
-                    }
-                   
-                });
+                    })
+
+                } else {
+                    //Imprimiendo respuesta pero sin guardar el jugador
+                    res.render('partidaPregunta', partidaPreguntaVm);
+                }
 
 
             } else {
