@@ -113,6 +113,7 @@
     <Folder Include="views\includes\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="views\preguntaListado.jade" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config" />
     <Content Include="bin\ChangeConfig.ps1" />

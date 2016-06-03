@@ -58,3 +58,10 @@ a {
 .usuario:hover .usuario-menu {
   display: block;
 }
+.navbar-inverse .navbar-nav>li>a,
+.navbar-inverse .navbar-nav>li>a:link {
+  color: #fff;
+}
+.navbar-inverse .navbar-nav>li:hover {
+  background-color: #5cb85c;
+}

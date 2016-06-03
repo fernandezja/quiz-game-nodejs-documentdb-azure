@@ -4,6 +4,12 @@ var router = express.Router();
 
 
 router.get('/', function (req, res) {
+
+    //Verificar si esta autenticado
+    if (res.locals.autenticado) {
+        res.redirect('/main');
+    }
+
     res.render('home', { title: 'QuizGame'});
 });
 
