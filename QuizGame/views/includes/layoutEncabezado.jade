@@ -1,7 +1,8 @@
 ﻿nav(class="navbar navbar-inverse navbar-fixed-top quizgame-nav")
-    div(class="usuario float-right", style="float:right;")
-        a(href="#",title="#{usuarioNombreCompleto}")
-            img(style="max-width:50px !important;", class="img-responsive",src="#{usuarioImagenUrl}", alt="#{usuarioNombreCompleto}")
+    if(autenticado)
+        div(class="usuario float-right", style="float:right;")
+            a(href="#",title="#{usuario.nombreCompleto}")
+                img(style="max-width:50px !important;", class="img-responsive",src="#{usuario.imagenUrl}", alt="#{usuario.nombreCompleto}")
         
 
     div(class="navbar-header")
