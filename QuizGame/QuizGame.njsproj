@@ -43,6 +43,7 @@
     <Compile Include="routesApi\dashBoardApi.js" />
     <Compile Include="routesApi\jugadasApi.js" />
     <Compile Include="routesApi\partidaApi.js" />
+    <Compile Include="routesApi\perfilApi - Copy.js" />
     <Compile Include="routesApi\perfilApi.js" />
     <Compile Include="routesApi\rankingApi.js" />
     <Compile Include="routesApi\preguntaApi.js" />
@@ -62,6 +63,8 @@
     <Content Include="public\stylesheets\bootstrap-social.css" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
+    <Content Include="views\perfildemo.html" />
+    <Content Include="views\perfil.jade" />
     <Content Include="views\dashboardAdmin.jade" />
     <Content Include="views\home.jade" />
     <Content Include="views\preguntaCrear.jade" />
