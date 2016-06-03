@@ -147,7 +147,11 @@ app.use('/api/ranking', rankingApi);
 app.use('/api/partida', partidaApi);
 app.use('/api/perfil', perfilApi);
 
-
+app.use('/logoff', function (req, res) {
+    req.logout();
+    req.session.destroy();
+    res.redirect('/');
+});
 
 
 

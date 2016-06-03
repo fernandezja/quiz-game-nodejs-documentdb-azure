@@ -2,8 +2,18 @@
     if(autenticado)
         div(class="usuario float-right", style="float:right;")
             a(href="#",title="#{usuario.nombreCompleto}")
-                img(style="max-width:50px !important;", class="img-responsive",src="#{usuario.imagenUrl}", alt="#{usuario.nombreCompleto}")
-        
+                img(class="img-responsive usuario-imagen",src="#{usuario.imagenUrl}", alt="#{usuario.nombreCompleto}")
+            div(class="usuario-menu")
+                ul
+                    li
+                        a(href="/perfil")
+                            i(class="fa fa-user") &nbsp; 
+                            span Mi perfil
+                    li
+                        a(href="/logoff")
+                        i(class="fa fa-sign-out") &nbsp; 
+                        span Salir
+                 
 
     div(class="navbar-header")
         
@@ -27,5 +37,14 @@
                 a(href="/info/acercaDe") Acerca de
             li
                 a(href="/info/contacto") Contacto
+            if(autenticado)
+                li
+                    a(href="/perfil")
+                        i(class="fa fa-user") &nbsp; 
+                        span Mi perfil
+                li
+                    a(href="/logoff")
+                        i(class="fa fa-sign-out") &nbsp; 
+                        span Salir
 
     
