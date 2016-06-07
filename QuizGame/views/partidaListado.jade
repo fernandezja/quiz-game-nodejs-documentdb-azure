@@ -10,8 +10,9 @@ block content
           form(action='/partida/#{p.id}', method='get')
             div
               button.btn.btn-primary(type="submit") #{p.descripcion}
-              
-            br
+     
+          form(action='/partida/eliminar/#{p.id}', method='post')
+            button.btn.btn-danger(type="submit") Eliminar
       br
       br      
       a(class="btn btn-default btn-success btn-block ", href="/partida/crear") 
