@@ -5,18 +5,16 @@ router.get('/:perfil/', function (req, res) {
     
     var perfildId = req.params.perfilId;
     
-    var perfil = {
-        id : perfildId,
-        nombre: 'Cristian',
-        apellido: 'Gimenez',
-        imagenUrl: 'foto de perfil',
-        puntaje: '2000',
-        preguntasTotales: '100',
-        preguntasCorrectas: '5',
-        preguntasIncorrectas: ''
-
-    }
-    
+    //var perfil = {
+    //    id : perfildId,
+    //    nombre: 'Cristian',
+    //    apellido: 'Gimenez',
+    //    imagenUrl: 'foto de perfil',
+    //    puntaje: '2000',
+    //    preguntasTotales: '100',
+    //    preguntasCorrectas: '58',
+    //    preguntasIncorrectas: '42'
+    //}
     
     res.json(perfil);
 });
