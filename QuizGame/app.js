@@ -33,6 +33,7 @@ var preguntaApi = require('./routesApi/preguntaApi');
 var rankingApi = require('./routesApi/rankingApi');
 var perfilApi = require('./routesApi/perfilApi');
 var partidaApi = require('./routesApi/partidaApi');
+var dashBoardApi = require('./routesApi/dashBoardApi');
 
 var app = express();
 
@@ -164,6 +165,8 @@ app.use('/api/pregunta', preguntaApi);
 app.use('/api/ranking', rankingApi);
 app.use('/api/partida', partidaApi);
 app.use('/api/perfil', perfilApi);
+app.use('/api/dashboard', dashBoardApi);
+
 
 app.use('/logoff', function (req, res) {
     req.logout();
