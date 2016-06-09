@@ -24,11 +24,15 @@ block content
                 span &nbsp; Nueva partida
             p &nbsp;
             p &nbsp;
-            a(class="btn btn-default btn-primary btn-block ", href="/pregunta/listado")
-                i(class="fa fa-list-uk") 
-                span &nbsp; Preguntas
-            p &nbsp;
-            a(class="btn btn-default btn-success btn-block ", href="/pregunta/crear") 
-                i(class="fa fa-plus") 
-                span &nbsp; Nueva pregunta
-        
+            p 
+            if(esAdmin)
+                h2 Administrador
+                p &nbsp;
+                a(class="btn btn-default btn-primary btn-block ", href="/pregunta/listado")
+                    i(class="fa fa-list-uk") 
+                    span &nbsp; Preguntas
+                p &nbsp;
+                a(class="btn btn-default btn-success btn-block ", href="/pregunta/crear") 
+                    i(class="fa fa-plus") 
+                    span &nbsp; Nueva pregunta
+            

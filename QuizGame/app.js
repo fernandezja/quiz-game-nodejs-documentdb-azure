@@ -8,12 +8,16 @@ var expressSession = require('express-session');
 
 
 
+
+
 var config = require('./config');
 
 var DocumentDBClient = require('documentdb').DocumentClient;
 var RepositorioBase = require('./datos/repositoryBase.js');
 var PartidaRepository = require('./datos/partidaRepository.js');
 var JugadorRepository = require('./datos/jugadorRepository.js');
+
+var AdminNegocio = require('./negocio/adminNegocio.js');
 
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -51,6 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 
+
 var docDbClient = new DocumentDBClient(config.host, {
     masterKey: config.authKey
 });
@@ -68,7 +73,7 @@ repositoryBaseParaJugador.init();
 passport.use(new FacebookStrategy({
     clientID: config.facebookAppId,
     clientSecret: config.facebookAppSecret,
-    callbackURL: "http://localhost:1337/auth/facebook/callback", //TODO: Modificar url que tome la actual,
+    callbackURL: config.hostname +'/auth/facebook/callback', 
     profileFields: ['id', 'name', 'picture.type(large)', 'emails', 'displayName', 'about', 'gender'],
 },
     function (accessToken, refreshToken, profile, cb) {
@@ -124,11 +129,14 @@ app.use(function (req, res, next) {
 
         jugadorRepository.obtenerPorUsuarioOCrear(user, function (jugador) {
             
+            var adminNegocio = new AdminNegocio();
             //Autenticado
             res.locals.anonimo = false;
             res.locals.autenticado = true;
+            res.locals.esAdmin = adminNegocio.esAdmin(user);
            
             res.locals.usuario = user;
+            res.locals.usuario.esAdmin = res.locals.esAdmin;
             res.locals.usuario.nombreCompleto = user.displayName;
 
             res.locals.usuario.jugadorId = null

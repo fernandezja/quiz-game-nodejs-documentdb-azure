@@ -54,11 +54,19 @@ router.get('/listado', function (req, res) {
 
 router.get('/crear', function (req, res) {
     
+    //Verificar si esta autenticado
+    if (!res.locals.esAdmin) res.redirect(401, '/sinpermiso');
+    //res.status(401).location('/sinpermiso').end();
+
     var partidaVm = {};
     res.render('partidaCrear', partidaVm);
 });
 
 router.post('/crear', function (req, res) {
+    
+    //Verificar si esta autenticado
+    if (!res.locals.esAdmin) res.redirect(401, '/sinpermiso');
+    
 
     //Recuperar partida de body por post
     var partida = req.body;

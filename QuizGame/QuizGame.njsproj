@@ -41,6 +41,7 @@
     <Compile Include="datos\partidaRepository.js" />
     <Compile Include="datos\repositoryBase.js" />
     <Compile Include="docdbUtils.js" />
+    <Compile Include="negocio\adminNegocio.js" />
     <Compile Include="routesApi\dashBoardApi.js" />
     <Compile Include="routesApi\jugadasApi.js" />
     <Compile Include="routesApi\partidaApi.js" />
@@ -85,6 +86,7 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="datos\" />
+    <Folder Include="negocio\" />
     <Folder Include="public\ajax\" />
     <Folder Include="public\jquery\" />
     <Folder Include="routesApi\" />
