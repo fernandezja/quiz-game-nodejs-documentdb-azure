@@ -39,3 +39,15 @@ node_modules
 *.cache
 /.vs/config/applicationhost.config
 /QuizGame/config.js
+config.js
+
+# Visual Studio 
+/.vs/config/applicationhost.config
+obj/
+.vscode/
+config.js
+package/
+*.pubxml*
+
+# Visual Studio Code
+.vscode
