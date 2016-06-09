@@ -267,6 +267,29 @@ function get(a, id) {
     return null;
 };
 
+router.post('/eliminar/:partidaId', function (req, res) {
+    
+    var partidaId = req.params.partidaId;
+    if (partidaId === undefined || partidaId == null) throw (null);
+    
+    
+    //Vmara
+    var partidaVm = {
+        partida: null,
+        seElimino: false,
+        
+    };
+    
+    
+    partidaRepository.eliminar(partidaId, function (partidaEliminada, seElimino) {
+        partidaVm.partida = partidaEliminada; //Ver de obtener la partida que se elimino
+        partidaVm.seElimino = seElimino;
+        res.render('partidaEliminar', partidaVm);
+    });
+
+   
+});
+
 
 
 

@@ -69,6 +69,7 @@
     <Content Include="views\dashboardAdmin.jade" />
     <Content Include="views\home.jade" />
     <Content Include="views\preguntaCrear.jade" />
+    <Content Include="views\partidaEliminar.jade" />
     <Content Include="views\preguntaEliminar.jade" />
     <Content Include="views\preguntaCreada.jade" />
     <Content Include="views\partidaCreada.jade" />
