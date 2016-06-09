@@ -277,6 +277,7 @@ router.post('/eliminar/:partidaId', function (req, res) {
     var partidaVm = {
         partida: null,
         seElimino: false,
+        
     };
     
     

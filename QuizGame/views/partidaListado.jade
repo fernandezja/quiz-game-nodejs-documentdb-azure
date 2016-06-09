@@ -8,11 +8,14 @@ block content
   
       each p in partidas
           form(action='/partida/#{p.id}', method='get')
-            div
+              div
               button.btn.btn-primary(type="submit") #{p.descripcion}
      
           form(action='/partida/eliminar/#{p.id}', method='post')
-            button.btn.btn-danger(type="submit") Eliminar
+            div
+            button.btn.btn-danger (type="submit") Eliminar
+            br
+            br
       br
       br      
       a(class="btn btn-default btn-success btn-block ", href="/partida/crear") 
