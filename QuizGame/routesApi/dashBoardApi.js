@@ -81,7 +81,7 @@ router.get('/totales', function (req, res) {
 
 
 
-            res.render('dashboardAdmin', totalesVm);
+            res.json('dashboardAdmin', totalesVm);
     });
 
 module.exports = router;
