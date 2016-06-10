@@ -16,7 +16,7 @@ router.get('/', function (req, res) {
 router.get('/main', function (req, res) {
     
     var mainVm = {
-        usuario: req.session.passport.user
+        
     };
 
     res.render('index', mainVm);

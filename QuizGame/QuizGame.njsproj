@@ -54,10 +54,13 @@
     <Compile Include="routes\partida.js" />
     <Compile Include="routes\pregunta.js" />
     <Compile Include="routes\index.js" />
+    <Compile Include="routes\configRoute.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Content Include="package.json" />
     <Content Include="public\ajax\cristian.html" />
+    <Content Include="public\ajax\enzo.html" />
+    <Content Include="public\imagenes\usuario-anonimo.png" />
     <Content Include="public\jquery\jose.html" />
     <Content Include="public\ajax\jose.html" />
     <Content Include="public\imagenes\QuizGame-Logo.png" />
@@ -65,6 +68,7 @@
     <Content Include="public\stylesheets\bootstrap-social.css" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
+    <Content Include="views\configGeneral.jade" />
     <Content Include="views\perfildemo.html" />
     <Content Include="views\perfil.jade" />
     <Content Include="views\dashboardAdmin.jade" />
@@ -122,6 +126,7 @@
   <ItemGroup>
     <Content Include="views\preguntaListado.jade" />
     <Content Include="Web.config" />
+    <None Include="Web.Release.config" />
     <Content Include="Web.Debug.config" />
     <Content Include="bin\ChangeConfig.ps1" />
     <Content Include="bin\download.ps1" />

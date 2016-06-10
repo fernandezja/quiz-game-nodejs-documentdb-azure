@@ -1,0 +1,95 @@
+﻿extends layout
+
+block content
+  p &nbsp;
+  div(class="row")
+        div(class="col-md-12") 
+            h2 Env
+            ul
+                li
+                    label(class="") process.env.HOSTNAME
+                    span(class="") #{process.env.HOSTNAME}
+                li
+                    label(class="") process.env.HOST
+                    span(class="") #{process.env.HOST}
+                li
+                    label(class="") process.env.AUTH_KEY
+                    span(class="") #{process.env.AUTH_KEY}
+                li
+                    label(class="") process.env.FACEBOOK_APPID
+                    span(class="") #{process.env.FACEBOOK_APPID}
+                li
+                    label(class="") process.env.FACEBOOK_APPSECRET
+                    span(class="") #{process.env.FACEBOOK_APPSECRET}
+
+
+        div(class="col-md-12") 
+            h2 App
+            ul
+            
+                li
+                    label(class="") config.hostname
+                    span(class="") #{config.hostname}
+                li
+                    label(class="") config.host
+                    span(class="") #{config.host}
+                li
+                    label(class="") config.authKey
+                    span(class="") #{config.authKey}
+                li
+                    label(class="") config.databaseId
+                    span(class="") #{config.databaseId}
+
+                li
+                    label(class="") config.collectionPreguntas
+                    span(class="") #{config.collectionId}
+
+                li
+                    label(class="") config.collectionPreguntas
+                    span(class="") #{config.collectionPreguntas}
+                li
+                    label(class="") config.collectionJugadores
+                    span(class="") #{config.collectionJugadores}
+                li
+                    label(class="") config.collectionJugadas
+                    span(class="") #{config.collectionJugadas}
+                li
+                    label(class="") config.facebookAppId
+                    span(class="") #{config.facebookAppId}
+                li
+                    label(class="") config.databaseId
+                    span(class="") #{config.databaseId}
+                li
+                    label(class="") config.facebookAppSecret
+                    span(class="") #{config.facebookAppSecret}
+
+         div(class="col-md-12") 
+            h2 User
+            ul
+            
+                li
+                    label(class="") anonimo
+                    span(class="") #{anonimo}
+                li
+                    label(class="") autenticado
+                    span(class="") #{autenticado}
+                li
+                    label(class="") esAdmin
+                    span(class="") #{esAdmin}
+                li
+                    label(class="") usuario
+                    span(class="") #{usuario}
+
+                if(usuario)
+                    li
+                        label(class="") usuario.nombreCompleto
+                        span(class="") #{usuario.nombreCompleto || ''}
+                    li
+                        label(class="") usuario.id
+                        span(class="") #{usuario.id || ''}
+                    li
+                        label(class="") usuario.imagenUrl
+                        span(class="") #{usuario.imagenUrl || ''}
+
+
+module.exports = config;

@@ -43,9 +43,9 @@ JugadorRepository.prototype = {
         }
 
         if (item.photos) {
-            jugador.imagenUrl = item.photos[0].value;
+            jugadorParaGuardar.imagenUrl = item.photos[0].value;
         } else {
-            jugador.imagenUrl = '/imagenes/usuario-anonimo.png';
+            jugadorParaGuardar.imagenUrl = '/imagenes/usuario-anonimo.png';
         }
 
 
@@ -53,7 +53,7 @@ JugadorRepository.prototype = {
             if (err) {
                 throw (err);
             }
-            callback(item);
+            callback(null, jugadorParaGuardar);
         });
     },
 

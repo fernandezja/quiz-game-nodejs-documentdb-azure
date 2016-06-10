@@ -11,7 +11,6 @@ function RepositoryBase (documentDBClient, databaseId, collectionId) {
 }
 
 
-
 RepositoryBase.prototype = {
     init: function (callback) {
         var self = this;

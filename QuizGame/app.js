@@ -7,9 +7,6 @@ var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 
 
-
-
-
 var config = require('./config');
 
 var DocumentDBClient = require('documentdb').DocumentClient;
@@ -32,6 +29,7 @@ var users = require('./routes/users');
 var pregunta = require('./routes/pregunta');
 var partida = require('./routes/partida');
 var perfil = require('./routes/perfil');
+var configuracion = require('./routes/configRoute');
 
 var preguntaApi = require('./routesApi/preguntaApi');
 var rankingApi = require('./routesApi/rankingApi');
@@ -90,12 +88,15 @@ passport.use(new LocalStrategy({
 },
     function (username, password, cb) {
         process.nextTick(function () {
+        
+            var randomId = randomuser.generate({
+                        length: 6,
+                        charset: 'numeric'
+                    });
             var user = {
-                id: 1,
-                displayName: username + ' '+ randomuser.generate({    
-                    length: 2,
-                    charset: 'numeric'
-                }),
+                provider: 'local',
+                id: randomId,
+                displayName: username + ' (' + randomId + ')'
             };
 
             return cb(null, user);
@@ -168,6 +169,7 @@ app.use('/users', users);
 app.use('/pregunta', pregunta);
 app.use('/partida', partida);
 app.use('/perfil', perfil);
+app.use('/config', configuracion);
 
 app.use('/api/pregunta', preguntaApi);
 app.use('/api/ranking', rankingApi);
