@@ -1,4 +1,5 @@
-﻿
+﻿var config = require('../config');
+
 function AdminNegocio() {
 }
 
@@ -6,31 +7,14 @@ module.exports = AdminNegocio;
 
 AdminNegocio.prototype = {
     
-    esAdmin: function (usuario) {
+    esAdmin: function (u) {
         var esAdmin = false;
         
-        if (usuario === undefined || usuario == null) return esAdmin;
+        if (u === undefined || u == null) return esAdmin;
         
-        var administradores = [{
-                user:'fernandezja',
-                id: '10208402982328663'
-            },
-            {
-                user: 'vicen.gimenez.9',
-                id: '1632942720'
-            },
-            {
-                user: 'cnchocron',
-                id: '1031881238'
-            },
-            {
-                user: 'enzo.medina.71653',
-                id: '100002382406470'
-            }
-        ]
-        
-        for (var i = 0; i < administradores.length ; i++) {
-            if (usuario.id == administradores[0].id) {
+        for (var i = 0; i < config.administradores.length ; i++) {
+            var adminItem = config.administradores[i];
+            if (u.id == adminItem.id && u.provider === adminItem.provider) {
                 esAdmin = true;
                 break;
             }

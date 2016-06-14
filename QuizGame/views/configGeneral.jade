@@ -80,7 +80,7 @@ block content
                     label(class="") usuario
                     span(class="") #{usuario}
 
-                if(usuario)
+                if(usuario!=null)
                     li
                         label(class="") usuario.nombreCompleto
                         span(class="") #{usuario.nombreCompleto || ''}

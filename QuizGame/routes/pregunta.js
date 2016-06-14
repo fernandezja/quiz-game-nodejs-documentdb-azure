@@ -58,6 +58,9 @@ router.get('/partida/:partidaId/pregunta/:preguntaId', function (req, res) {
 
 router.get('/listado', function (req, res) {
     
+    //Verificar si esta autenticado
+    if (!res.locals.esAdmin) res.redirect(401, '/sinpermiso');
+
     var preguntasVm = {
         mensaje: '',
         preguntas: []
@@ -79,12 +82,20 @@ router.get('/listado', function (req, res) {
 
 router.get('/crear', function (req, res) {
     
+    
+    //Verificar si esta autenticado
+    if (!res.locals.esAdmin) res.redirect(401, '/sinpermiso');
+
     var preguntaVm = {};
     res.render('preguntaCrear', preguntaVm);
 });
 
 router.post('/crear', function (req, res) {
     
+    
+    //Verificar si esta autenticado
+    if (!res.locals.esAdmin) res.redirect(401, '/sinpermiso');
+
     var preguntaForm = req.body;
     if (preguntaForm === undefined || preguntaForm == null) throw (null);
     
@@ -139,6 +150,10 @@ router.post('/crear', function (req, res) {
 
 router.post('/eliminar/:preguntaId', function (req, res) {
     
+    
+    //Verificar si esta autenticado
+    if (!res.locals.esAdmin) res.redirect(401, '/sinpermiso');
+
     var preguntaId = req.params.preguntaId;
     if (preguntaId === undefined || preguntaId == null) throw (null);
     

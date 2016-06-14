@@ -7,7 +7,8 @@ block content
         div(class="col-md-12")
             div(class="pregunta-partida")
                 span Esta es la partida de ejemplo para ver el titulo ok?
-            h2(data-id="#{preguntaActual.id}") #{preguntaActual.descripcion}
+            h2(data-id="#{preguntaActual.id}") 
+                span= preguntaActual.descripcion
             
         div(class="col-md-12")
             each r in preguntaActual.respuestas
