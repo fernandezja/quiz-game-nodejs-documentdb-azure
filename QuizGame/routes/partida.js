@@ -88,7 +88,6 @@ router.post('/crear', function (req, res) {
    
 });
 
-
 router.get('/:partidaId/ranking', function (req, res) {
     
     var partidaId = req.params.partidaId;    
@@ -117,7 +116,6 @@ router.get('/:partidaId/pregunta/:preguntaId', function (req, res) {
     
     //Verificar si esta autenticado
     if (res.locals.anonimo) res.redirect('/');
-    
     
     
     var partidaId = req.params.partidaId;
